@@ -218,6 +218,7 @@ export default {
 
   /* ================= 音频转换 ================= */
   'audio-convert'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -244,6 +245,7 @@ export default {
 
   /* ================= 变速与倒放 ================= */
   'audio-speed'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
