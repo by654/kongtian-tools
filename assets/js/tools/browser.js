@@ -41,6 +41,7 @@ export default {
 
   /* ================= 特性检测 ================= */
   'feature-detect'(root) {
+    const $ = (s) => root.querySelector(s);
     const features = [
       ['WebGL 2', () => !!document.createElement('canvas').getContext('webgl2')],
       ['WebAssembly', () => typeof WebAssembly === 'object'],
