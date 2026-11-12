@@ -26,6 +26,7 @@ async function setupPdfjs(ctx) {
 export default {
   /* ================= 合并拆分 ================= */
   'pdf-merge'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -88,6 +89,7 @@ export default {
 
   /* ================= PDF 信息 ================= */
   'pdf-info'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -132,6 +134,7 @@ export default {
 
   /* ================= PDF 文本 ================= */
   'pdf-text'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -164,6 +167,7 @@ export default {
 
   /* ================= PDF 水印页码 ================= */
   'pdf-watermark'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -213,6 +217,7 @@ export default {
 
   /* ================= PDF 签名 ================= */
   'pdf-sign'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -271,6 +276,7 @@ export default {
 
   /* ================= PDF Base64 ================= */
   'pdf-base64'(root) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
