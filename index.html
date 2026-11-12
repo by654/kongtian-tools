@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>空天工具合集 · 浏览器里的万能工具箱</title>
+<meta name="description" content="空天工具合集：200+ 纯前端小工具，文本、编码、开发、数据、图片、PDF、音视频、二维码、生活效率。文件不上传，全部在本地浏览器处理。">
+<meta name="theme-color" content="#070b14">
+<meta property="og:title" content="空天工具合集">
+<meta property="og:description" content="浏览器里的万能工具箱 · 纯前端 · 本地处理 · 文件不上传">
+<meta property="og:type" content="website">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/favicon.svg">
+<link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar" aria-label="主导航">
+    <a class="brand" href="#/">
+      <span class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="7" fill="url(#bg1)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#bg1)" stroke-width="2" transform="rotate(-28 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#bg2)" stroke-width="1.4" transform="rotate(32 24 24)" opacity=".7"/><circle cx="40" cy="16" r="2.4" fill="#67e8f9"/><defs><linearGradient id="bg1" x1="4" y1="4" x2="44" y2="44"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#818cf8"/></linearGradient><linearGradient id="bg2" x1="4" y1="44" x2="44" y2="4"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs></svg>
+      </span>
+      <span class="brand-text"><b>空天工具合集</b><small>KONGTIAN TOOLBOX</small></span>
+    </a>
+    <nav class="side-nav" id="side-nav"></nav>
+    <div class="side-foot">
+      <div class="privacy-dot"><span></span>纯前端 · 文件不上传</div>
+      <div class="side-links">
+        <a href="#/about">关于</a>
+        <a href="https://github.com/by654/kongtian-tools" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menu-btn" aria-label="打开菜单">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="search-trigger" id="search-trigger" aria-label="搜索工具">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>搜索工具、功能、关键词…</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+      <div class="top-actions">
+        <button class="icon-btn" id="theme-btn" aria-label="切换主题" title="切换深色/浅色">
+          <svg viewBox="0 0 24 24" class="i-moon"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" class="i-sun"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <a class="icon-btn hide-sm" href="https://github.com/by654/kongtian-tools" target="_blank" rel="noopener" aria-label="GitHub 仓库" title="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </header>
+    <div class="view" id="view"></div>
+    <nav class="bottom-nav" id="bottom-nav">
+      <a href="#/" data-nav="home"><svg viewBox="0 0 24 24"><path d="m4 10 8-6 8 6v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19v-9Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg><span>首页</span></a>
+      <a href="#/all" data-nav="all"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="13" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="4" y="13" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="13" y="13" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/></svg><span>全部</span></a>
+      <a href="#/fav" data-nav="fav"><svg viewBox="0 0 24 24"><path d="m12 3.8 2.5 5.2 5.7.8-4.1 4 1 5.6L12 16.8l-5.1 2.6 1-5.6-4.1-4 5.7-.8L12 3.8Z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg><span>收藏</span></a>
+      <a href="#/recent" data-nav="recent"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 7.5V12l3 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>最近</span></a>
+    </nav>
+  </div>
+</div>
+
+<div class="palette hidden" id="palette" role="dialog" aria-modal="true" aria-label="快速搜索">
+  <div class="palette-box">
+    <div class="palette-input">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="palette-input" placeholder="搜索工具，例如：JSON、二维码、时间戳、AES…" autocomplete="off">
+      <kbd>ESC</kbd>
+    </div>
+    <div class="palette-list" id="palette-list"></div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+<script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>

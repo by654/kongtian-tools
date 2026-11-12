@@ -1,0 +1,16 @@
+{
+  "name": "空天工具合集",
+  "short_name": "空天工具",
+  "description": "浏览器里的万能工具箱 · 纯前端 · 文件不上传",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070b14",
+  "theme_color": "#070b14",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "./assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
