@@ -7,6 +7,7 @@ const $ = (root, s) => root.querySelector(s);
 export default {
   /* ================= ZIP ================= */
   'zip-tool'(root, ctx) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="tabs" id="zt-tabs"><button class="tab active" data-i="0">压缩打包</button><button class="tab" data-i="1">解压预览</button></div>
@@ -75,6 +76,7 @@ export default {
 
   /* ================= 文件分割 ================= */
   'file-split'(root) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="tabs" id="fs-tabs"><button class="tab active" data-i="0">分割文件</button><button class="tab" data-i="1">合并分片</button></div>
@@ -126,6 +128,7 @@ export default {
 
   /* ================= 文件预览 ================= */
   'file-preview'(root) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -162,6 +165,7 @@ export default {
 
   /* ================= 批量重命名 ================= */
   'batch-rename'(root) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
@@ -206,6 +210,7 @@ export default {
 
   /* ================= 目录树 ================= */
   'dir-tree'(root) {
+    const $ = (s) => root.querySelector(s);
     root.innerHTML = `
       <div class="tool-ui">
         <div class="panel">
