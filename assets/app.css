@@ -451,3 +451,129 @@ html[data-theme="light"] .toast{background:#fff}
   .main{margin:0}
   body{background:#fff;color:#000}
 }
+
+/* =========================================================
+   过渡与动效
+   ========================================================= */
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(10px) scale(.996)}
+  to{opacity:1;transform:none}
+}
+@keyframes riseIn{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(14px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes stripeMove{to{background-position:0 0,22px 0}}
+@keyframes pulseSoft{0%,100%{opacity:1}50%{opacity:.55}}
+
+.view.page-in{animation:pageIn .36s cubic-bezier(.22,1,.36,1) backwards}
+
+/* 首页首屏分层入场 */
+.hero-kicker,.hero h1,.hero p,.hero-search,.hero-stats{
+  animation:riseIn .55s cubic-bezier(.22,1,.36,1) backwards;
+}
+.hero-kicker{animation-delay:.02s}
+.hero h1{animation-delay:.07s}
+.hero p{animation-delay:.12s}
+.hero-search{animation-delay:.17s}
+.hero-stats{animation-delay:.22s}
+.hero-orbit{animation:fadeIn .8s .1s backwards}
+
+/* 卡片错峰入场 */
+.cat-grid>*,.tool-grid>*{animation:cardIn .45s cubic-bezier(.22,1,.36,1) backwards}
+.cat-grid>*:nth-child(2),.tool-grid>*:nth-child(2){animation-delay:.03s}
+.cat-grid>*:nth-child(3),.tool-grid>*:nth-child(3){animation-delay:.06s}
+.cat-grid>*:nth-child(4),.tool-grid>*:nth-child(4){animation-delay:.09s}
+.cat-grid>*:nth-child(5),.tool-grid>*:nth-child(5){animation-delay:.12s}
+.cat-grid>*:nth-child(6),.tool-grid>*:nth-child(6){animation-delay:.15s}
+.cat-grid>*:nth-child(7),.tool-grid>*:nth-child(7){animation-delay:.18s}
+.cat-grid>*:nth-child(8),.tool-grid>*:nth-child(8){animation-delay:.21s}
+.cat-grid>*:nth-child(n+9),.tool-grid>*:nth-child(n+9){animation-delay:.24s}
+
+/* 工具页头部与面板错峰渐入 */
+.tool-head,.crumb{animation:riseIn .4s cubic-bezier(.22,1,.36,1) backwards}
+.tool-ui>*{animation:riseIn .38s cubic-bezier(.22,1,.36,1) backwards}
+.tool-ui>*:nth-child(2){animation-delay:.045s}
+.tool-ui>*:nth-child(3){animation-delay:.09s}
+.tool-ui>*:nth-child(4){animation-delay:.135s}
+.tool-ui>*:nth-child(5){animation-delay:.18s}
+.tool-ui>*:nth-child(n+6){animation-delay:.22s}
+.dep-card{animation:riseIn .3s both}
+.dep-done{animation:fadeIn .3s both}
+
+/* 侧栏与底部导航的当前项指示 */
+.nav-item{position:relative}
+.nav-item::before{
+  content:"";position:absolute;left:0;top:50%;width:3px;height:0;border-radius:3px;
+  background:linear-gradient(180deg,#22d3ee,#818cf8);
+  transform:translateY(-50%);transition:height .22s cubic-bezier(.22,1,.36,1);
+}
+.nav-item.active::before{height:18px}
+.side-links a{transition:color .16s}
+.bottom-nav a svg{transition:transform .2s,color .2s}
+.bottom-nav a.active svg{transform:translateY(-2px) scale(1.08)}
+.brand-logo{animation:floatY 6s ease-in-out infinite}
+
+/* 按钮与卡片交互 */
+.btn{position:relative;overflow:hidden;transition:background .16s,border-color .16s,transform .12s,box-shadow .16s,color .16s}
+.btn:active{transform:translateY(1px) scale(.985)}
+.btn.primary::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.28) 48%,transparent 64%);
+  transform:translateX(-130%);transition:transform .55s ease;
+}
+.btn.primary:hover::after{transform:translateX(130%)}
+.cat-card,.tool-card{will-change:transform}
+.cat-card .cat-icon{transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.cat-card:hover .cat-icon{transform:rotate(-6deg) scale(1.08)}
+.tool-card .tc-icon{transition:transform .22s}
+.tool-card:hover .tc-icon{transform:scale(1.08)}
+.stat{transition:transform .18s,border-color .18s,background .18s}
+.stat:hover{transform:translateY(-2px);border-color:var(--line-strong)}
+.thumb img{transition:transform .3s ease}
+.thumb:hover img{transform:scale(1.04)}
+
+/* 依赖进度：流动条纹，明确“正在下载” */
+.dep-card .progress i{
+  background-image:linear-gradient(90deg,#22d3ee,#818cf8),
+    linear-gradient(45deg,rgba(255,255,255,.22) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.22) 50%,rgba(255,255,255,.22) 75%,transparent 75%);
+  background-size:100% 100%,22px 22px;
+  animation:stripeMove .65s linear infinite;
+}
+.dep-done svg{animation:fadeIn .3s both}
+
+/* 抽屉遮罩淡入 */
+.scrim{display:block;opacity:0;pointer-events:none;transition:opacity .24s ease}
+body.drawer-open .scrim{display:block;opacity:1;pointer-events:auto}
+
+/* 主题切换时只对大面积色块做过渡 */
+html.theme-switching body,
+html.theme-switching .sidebar,
+html.theme-switching .topbar,
+html.theme-switching .bottom-nav,
+html.theme-switching .panel,
+html.theme-switching .cat-card,
+html.theme-switching .tool-card,
+html.theme-switching .stat{
+  transition:background-color .32s ease,color .32s ease,border-color .32s ease;
+}
+
+/* 键盘焦点更清晰 */
+:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--acc)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .brand-logo,.hero-orbit svg{animation:none!important}
+}
+
