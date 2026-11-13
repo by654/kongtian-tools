@@ -404,7 +404,7 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=4`);
+    const mod = await import(`./tools/${tool.cat}.js?v=5`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);
@@ -432,6 +432,9 @@ async function renderTool(id) {
 /* ---------------- 主渲染 ---------------- */
 function render() {
   runCleanup();
+  view.classList.remove('page-in');
+  void view.offsetWidth;
+  view.classList.add('page-in');
   const { parts, query } = parseRoute();
   const name = routeName();
   if (name === 'home') renderHome();
@@ -470,7 +473,9 @@ function applyTheme(theme) {
 }
 applyTheme(localStorage.getItem(LS.theme) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
 document.getElementById('theme-btn').addEventListener('click', () => {
+  document.documentElement.classList.add('theme-switching');
   applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+  setTimeout(() => document.documentElement.classList.remove('theme-switching'), 360);
 });
 
 /* ---------------- 抽屉 ---------------- */
