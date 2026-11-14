@@ -1,6 +1,6 @@
 ﻿/* 空天工具合集 · Service Worker
    只缓存同源静态资源；第三方 CDN 依赖仍走网络（浏览器 HTTP 缓存）。 */
-const CACHE = 'kongtian-tools-v12';
+const CACHE = 'kongtian-tools-v13';
 const SHELL = [
   './',
   './index.html',
@@ -12,7 +12,9 @@ const SHELL = [
   './assets/js/core/ui.js',
   './assets/js/core/deps.js',
   './assets/js/core/kit.js',
-  './assets/js/core/rand.js'
+  './assets/js/core/rand.js',
+  './assets/js/core/merge-map.js',
+  './assets/js/core/merge.js'
 ];
 
 self.addEventListener('install', (event) => {

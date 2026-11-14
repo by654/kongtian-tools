@@ -1,4 +1,5 @@
-﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=10';
+﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=11';
+import { MERGED, ALIAS, mountMerged } from './core/merge.js?v=11';
 import { icon, esc, copy, toast } from './core/ui.js';
 import { loadDeps, isLoaded, DEPS } from './core/deps.js';
 
@@ -382,6 +383,13 @@ async function depsWithUI(ids, area) {
 
 /* ---------------- 工具页 ---------------- */
 async function renderTool(id) {
+  let initialTab = null;
+  const alias = ALIAS[id];
+  if (alias) {
+    id = alias.target;
+    initialTab = alias.tab;
+    try { history.replaceState(null, '', '#/t/' + id); } catch { /* ignore */ }
+  }
   const tool = TOOL_MAP[id];
   if (!tool) return renderNotFound();
   addRecent(id);
@@ -420,7 +428,7 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=10`);
+    const mod = await import(`./tools/${tool.cat}.js?v=11`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);
@@ -436,6 +444,10 @@ async function renderTool(id) {
       icon,
       isMobile: () => window.matchMedia('(max-width: 860px)').matches
     };
+    if (MERGED[id]) {
+      mountMerged(root, ctx, MERGED[id], fn, initialTab);
+      return;
+    }
     const ret = fn(root, ctx);
     if (ret && typeof ret.then === 'function') await ret;
   } catch (e) {

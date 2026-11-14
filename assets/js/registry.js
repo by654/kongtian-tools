@@ -13,8 +13,7 @@ export const CATEGORIES = [
   { id: 'random', name: '随机生成', icon: 'random', desc: '随机数、抽奖、占位图、假数据' },
   { id: 'security', name: '安全隐私', icon: 'security', desc: 'AES、RSA、EXIF、脱敏、隐写' },
   { id: 'design', name: '颜色设计', icon: 'design', desc: '配色、CSS、SVG、字体' },
-  { id: 'image', name: '图片处理', icon: 'image', desc: '压缩、裁剪、水印、OCR' },
-  { id: 'pdf', name: 'PDF 文档', icon: 'pdf', desc: '合并拆分、水印、签名、文本' },
+  { id: 'image', name: '图片处理', icon: 'image', desc: '压缩、裁剪、水印、滤镜、证件照' },
   { id: 'file', name: '文件压缩', icon: 'file', desc: 'ZIP、分割、预览、重命名' },
   { id: 'audio', name: '音频工具', icon: 'audio', desc: '录音、剪辑、节拍、噪音' },
   { id: 'media', name: '视频设备', icon: 'media', desc: '摄像头、录屏、屏幕测试' },
@@ -40,7 +39,7 @@ export const CATEGORIES = [
   { id: 'funpro', name: '游戏与生成', icon: 'fun', desc: '数值、精灵图、谜题、生成艺术' },
   { id: 'geoext', name: '地图与天文', icon: 'globe', desc: '坐标、瓦片、轨迹、气象' },
   { id: 'infra', name: '设备与协议', icon: 'chip', desc: '硬件、WebRTC、IoT、3D' },
-  { id: 'convert', name: '文件转换', icon: 'media', desc: '音视频、图片、文档、字幕、PDF、表格、压缩包' }
+  { id: 'convert', name: '文件转换', icon: 'media', desc: '音视频、图片、文档、字幕、PDF（含签名）、表格、压缩包' }
 ];
 
 export const TOOLS = [
@@ -64,20 +63,18 @@ export const TOOLS = [
   t('speech-text', '语音转文本', 'text', 'Web Speech API 实时听写（部分浏览器需联网）', ['语音识别', '听写', 'STT']),
 
   /* ---------------- 编码 ---------------- */
-  t('base64', 'Base64 工具', 'encoding', '文本/文件/图片与 Data URL 互转', ['Base64', 'DataURL', '编码'], { hot: true }),
+  t('base64', 'Base64 工具', 'encoding', '文本/文件/图片/PDF 与 Data URL 互转（已合并图片 Base64、PDF Base64）', ['Base64', 'DataURL', '编码', '图片base64', 'PDF base64', '文件编码'], { hot: true }),
   t('base-n', 'Base32 / 58 / 62 / 85', 'encoding', 'Base32、Base58、Base62、Base85、UU、QP、Punycode', ['Base32', 'Base58', 'Base85', 'Punycode']),
   t('radix', '进制转换', 'encoding', '2/8/10/16 进制与任意进制互转', ['二进制', '十六进制', '进制']),
   t('text-binary', '文本与字节', 'encoding', '文本↔二进制/十六进制/ASCII，UTF-8 字节查看', ['二进制', '十六进制', 'ASCII', 'UTF-8']),
   t('xml-json', 'XML 与 JSON', 'encoding', 'XML 转 JSON、JSON 转 XML、美化与压缩', ['XML', 'JSON', '转换']),
   t('yaml-json', '配置格式互转', 'encoding', 'YAML / TOML / INI / JSON 互转与格式化', ['YAML', 'TOML', 'INI', 'JSON']),
-  t('csv-json', 'CSV 与 JSON', 'encoding', 'CSV↔JSON、分隔符识别、表头处理', ['CSV', 'JSON', '表格']),
-  t('excel-convert', 'Excel 转换', 'encoding', 'Excel 转 CSV/JSON，CSV 转 Excel', ['Excel', 'xlsx', 'CSV'], { deps: ['xlsx'] }),
   t('meta-tags', '网页元信息生成', 'encoding', 'Meta/OG/Twitter/JSON-LD/PWA/robots/sitemap/RSS', ['Meta', 'OG', 'SEO', 'PWA']),
 
   /* ---------------- 开发 ---------------- */
   t('json-workbench', 'JSON 工作台', 'dev', '格式化、压缩、校验、树形查看、JSONPath 提取', ['JSON', '格式化', '校验', 'JSONPath'], { hot: true }),
   t('json-to-code', 'JSON 转代码', 'dev', '生成 TypeScript/Go/Java/Python/C#/Rust 类型', ['TypeScript', 'Go', 'Java', 'Rust']),
-  t('json-mock', 'Mock 数据生成', 'dev', '按模板生成假 JSON、测试数据表', ['Mock', '假数据', '测试']),
+  t('json-mock', 'Mock 数据生成', 'dev', '按模板生成假 JSON、测试数据表；含用户/订单/商品业务假数据（已合并假数据 JSON）', ['Mock', '假数据', '测试', 'fake', '用户数据', '订单数据']),
   t('jwt-tool', 'JWT 解析', 'dev', '解析 Header/Payload，检查过期时间', ['JWT', 'Token', '过期']),
   t('regex-test', '正则测试', 'dev', '实时匹配高亮、替换预览、常用正则库', ['正则', 'regex', '匹配']),
   t('hash-tool', '哈希与 HMAC', 'dev', 'MD5/SHA-1/SHA-256/SHA-512、HMAC、文件哈希', ['MD5', 'SHA256', 'HMAC', '哈希'], { deps: ['cryptojs'] }),
@@ -86,7 +83,6 @@ export const TOOLS = [
   t('totp-tool', 'TOTP / HOTP', 'dev', '生成与验证动态口令，导出二维码', ['TOTP', 'HOTP', '2FA'], { deps: ['qrcode'] }),
   t('code-format', '代码格式化', 'dev', 'HTML/CSS/JS/JSON/SQL/XML 美化与压缩', ['格式化', '压缩', 'CSS', 'SQL']),
   t('markdown-editor', 'Markdown 编辑器', 'dev', '实时预览、目录、导出 HTML', ['Markdown', '编辑器', '预览'], { deps: ['marked', 'dompurify'], hot: true }),
-  t('markdown-convert', 'Markdown 转换', 'dev', 'Markdown↔HTML、转纯文本、目录生成', ['Markdown', 'HTML', '目录'], { deps: ['marked'] }),
   t('codegen', '开发模板生成', 'dev', '.gitignore / LICENSE / README / Dockerfile / compose / nginx', ['gitignore', 'LICENSE', 'Dockerfile']),
   t('http-info', 'HTTP 与 MIME 查询', 'dev', '状态码、MIME 类型、UA 解析、常用端口', ['HTTP', '状态码', 'MIME', 'UA']),
   t('url-tools', 'URL 解析与 UTM', 'dev', '参数解析构建、编码、UTM 链接、Cookie 解析', ['URL', 'UTM', '参数', 'Cookie']),
@@ -98,7 +94,6 @@ export const TOOLS = [
 
   /* ---------------- 数据 ---------------- */
   t('csv-workbench', 'CSV 工作台', 'data', '预览、排序、筛选、去重、列操作、导出', ['CSV', '表格', '筛选', '排序'], { hot: true }),
-  t('table-convert', '表格格式转换', 'data', 'CSV/TSV/Markdown/JSON/HTML 表格互转', ['Markdown表格', 'CSV', 'JSON']),
   t('data-stats', '统计计算', 'data', '平均数/中位数/众数/标准差/分位数/相关系数/回归', ['统计', '平均', '标准差', '回归']),
   t('data-validate', '数据校验', 'data', '身份证、银行卡 Luhn、IBAN、ISBN、EAN、VIN、IMEI', ['校验', '身份证', 'Luhn', 'IBAN']),
   t('data-pivot', '分组与透视', 'data', '按列分组统计、简易透视表', ['分组', '透视表', '汇总']),
@@ -119,7 +114,6 @@ export const TOOLS = [
   t('calendar-gen', '日历生成', 'time', '月历/年历生成、导出图片', ['日历', '月历', '年历']),
   t('lunar', '农历与节气', 'time', '农历转换、节气、生肖、星座', ['农历', '节气', '生肖', '星座']),
   t('sun-moon', '日出日落与月相', 'time', '太阳位置、黄金时刻、蓝调时刻、月相', ['日出', '日落', '月相', '黄金时刻']),
-  t('sleep-calc', '睡眠计算', 'time', '根据入睡/起床时间计算睡眠周期', ['睡眠', '作息', '周期']),
   t('anniversary', '纪念日倒数', 'time', '纪念日、生日、高考/项目倒数日', ['纪念日', '生日', '倒数日']),
 
   /* ---------------- 数学 ---------------- */
@@ -140,7 +134,6 @@ export const TOOLS = [
   t('random-basic', '随机数与颜色', 'random', '随机整数/小数、随机颜色、渐变、种子', ['随机数', '颜色', '渐变']),
   t('random-person', '随机身份数据', 'random', '姓名、英文名、公司、地址、邮箱、手机号（测试）', ['姓名', '测试数据', '地址']),
   t('lorem-gen', '随机文案', 'random', 'Lorem Ipsum、中文段落、名言、诗词、笑话', ['Lorem', '文案', '名言', '诗词']),
-  t('fake-json', '假数据 JSON', 'random', '生成用户/订单/商品等假 JSON 数据', ['假数据', 'JSON', 'Mock']),
   t('random-group', '随机分组与点名', 'random', '随机分组、队伍、点名、抽题、打乱顺序', ['分组', '点名', '抽签']),
   t('wheel', '抽奖转盘', 'random', '自定义奖项转盘，带减速动画', ['转盘', '抽奖', '幸运']),
   t('dice-coin', '骰子与决定器', 'random', '骰子、硬币、猜拳、随机决定', ['骰子', '硬币', '猜拳', '决定']),
@@ -157,7 +150,6 @@ export const TOOLS = [
   t('privacy-gen', '隐私政策生成', 'security', '隐私政策、Cookie 政策、服务条款模板', ['隐私政策', 'Cookie', '条款']),
   t('vault', '本地加密笔记', 'security', '口令加密的本地笔记/密码本', ['密码本', '笔记', '加密']),
   t('idn-check', '域名安全检查', 'security', 'IDN 同形异义、URL 结构、可疑字符检测', ['IDN', '钓鱼', '域名']),
-  t('clipboard-tool', '剪贴板工具', 'security', '读取/写入剪贴板、清理提醒、格式转换', ['剪贴板', '复制', '粘贴']),
 
   /* ---------------- 设计 ---------------- */
   t('color-convert', '颜色转换', 'design', 'HEX/RGB/HSL/HSV/CMYK 互转与颜色命名', ['HEX', 'RGB', 'HSL', '颜色'], { hot: true }),
@@ -175,30 +167,17 @@ export const TOOLS = [
 
   /* ---------------- 图片 ---------------- */
   t('image-compress', '图片压缩', 'image', '质量/尺寸压缩、批量处理、体积对比', ['压缩', '批量', 'WebP'], { hot: true }),
-  t('image-resize', '缩放与格式转换', 'image', 'PNG/JPG/WebP 互转、批量缩放', ['缩放', '格式转换', 'WebP']),
   t('image-crop', '裁剪与旋转', 'image', '自由裁剪、旋转、翻转、圆角', ['裁剪', '旋转', '翻转']),
   t('image-watermark', '图片水印', 'image', '文字/图片/时间水印，批量应用', ['水印', '时间', '批量']),
   t('image-filter', '图片滤镜', 'image', '灰度、反色、亮度/对比度/饱和度、模糊、像素化', ['滤镜', '灰度', '模糊']),
   t('image-grid', '九宫格与拼接', 'image', '九宫格切图、长图拼接、多图合并', ['九宫格', '拼接', '长图']),
   t('image-info', '图片信息', 'image', '尺寸、体积、格式、EXIF、直方图', ['尺寸', 'EXIF', '直方图']),
-  t('image-base64', '图片 Base64', 'image', '图片↔Base64/Data URL', ['Base64', 'DataURL', '图片']),
-  t('image-ascii', '图片转 ASCII', 'image', '字符画、像素画生成', ['ASCII', '字符画', '像素']),
-  t('image-pdf', '图片转 PDF', 'image', '多图合成 PDF，设置页面与边距', ['PDF', '图片', '合并'], { deps: ['pdflib'] }),
-  t('pdf-image', 'PDF 转图片', 'image', '逐页渲染为 PNG/JPG', ['PDF', 'PNG', '渲染'], { deps: ['pdfjs'] }),
-  t('image-ocr', '图片 OCR', 'image', '本地识别中英文文字（首次下载语言包）', ['OCR', '文字识别', '图片'], { deps: ['tesseract'] }),
   t('image-diff', '图片对比', 'image', '并排/滑动对比、像素差异图', ['对比', '差异', '像素']),
   t('image-idphoto', '证件照与头像', 'image', '证件照裁剪、头像圆角、社交尺寸', ['证件照', '头像', '尺寸']),
 
   /* ---------------- PDF ---------------- */
-  t('pdf-merge', 'PDF 合并拆分', 'pdf', '合并、拆分、删除/排序/旋转页面', ['PDF', '合并', '拆分'], { deps: ['pdflib'], hot: true }),
-  t('pdf-info', 'PDF 信息', 'pdf', '页数、元数据、缩略图预览', ['PDF', '元数据', '缩略图'], { deps: ['pdfjs'] }),
-  t('pdf-text', 'PDF 文本提取', 'pdf', '逐页提取文本，导出 TXT', ['PDF', '文本', '提取'], { deps: ['pdfjs'] }),
-  t('pdf-watermark', 'PDF 水印页码', 'pdf', '添加文字水印与页码', ['PDF', '水印', '页码'], { deps: ['pdflib'] }),
-  t('pdf-sign', 'PDF 签名', 'pdf', '手写签名并嵌入 PDF', ['PDF', '签名', '手写'], { deps: ['pdflib'] }),
-  t('pdf-base64', 'PDF Base64', 'pdf', 'PDF↔Base64 互转', ['PDF', 'Base64', '编码']),
 
   /* ---------------- 文件 ---------------- */
-  t('zip-tool', 'ZIP 压缩解压', 'file', '打包下载、解压预览、ZIP 内文件提取', ['ZIP', '压缩', '解压'], { deps: ['jszip'], hot: true }),
   t('file-split', '文件分割合并', 'file', '按大小分割文件、合并分片', ['分割', '合并', '大文件']),
   t('file-preview', '文件预览', 'file', 'CSV/Excel/JSON/XML/图片/PDF/音视频预览', ['预览', '拖拽', '文件']),
   t('batch-rename', '批量重命名', 'file', '规则生成新文件名、导出 ZIP', ['重命名', '批量', '规则']),
@@ -209,7 +188,6 @@ export const TOOLS = [
   t('recorder', '录音机', 'audio', '麦克风录音、波形、下载 WebM/WAV', ['录音', '麦克风', 'WebM']),
   t('audio-player', '音频播放与波形', 'audio', '本地音频播放、波形与频谱可视化', ['播放器', '波形', '频谱']),
   t('audio-edit', '音频剪辑', 'audio', '裁剪、合并、淡入淡出、音量', ['裁剪', '合并', '淡入淡出']),
-  t('audio-convert', '音频转换', 'audio', '视频转音频、导出 WAV、格式转换', ['WAV', '视频转音频', '格式']),
   t('audio-speed', '变速与倒放', 'audio', '变速、变调、倒放（Web Audio）', ['变速', '倒放', '变调']),
   t('metronome', '节拍器', 'audio', 'BPM 节拍、拍号、重音提示', ['节拍', 'BPM', '音乐']),
   t('tuner', '调音器', 'audio', '麦克风音高检测、标准音参考', ['调音', '音高', '吉他']),
@@ -225,8 +203,7 @@ export const TOOLS = [
   t('input-test', '输入设备测试', 'media', '键盘、鼠标、触摸、手柄、震动测试', ['键盘', '鼠标', '手柄', '触摸']),
 
   /* ---------------- 二维码 ---------------- */
-  t('qr-gen', '二维码生成', 'qr', '文本/URL/WiFi/vCard/邮件/短信/电话/位置', ['二维码', 'WiFi', 'vCard'], { deps: ['qrcode'], hot: true }),
-  t('qr-batch', '批量二维码', 'qr', '批量生成二维码并打包 ZIP', ['批量', '二维码', 'ZIP'], { deps: ['qrcode', 'jszip'] }),
+  t('qr-gen', '二维码生成', 'qr', '文本/URL/WiFi/vCard/邮件/短信/电话/位置，支持批量生成打包（已合并批量二维码）', ['二维码', 'WiFi', 'vCard', '批量', 'ZIP'], { deps: ['qrcode', 'jszip'], hot: true }),
   t('qr-scan', '二维码识别', 'qr', '上传图片或摄像头扫码（本地解码）', ['扫码', '识别', '摄像头'], { deps: ['jsqr'] }),
   t('barcode', '条形码工具', 'qr', 'Code128/EAN-13/UPC 生成与校验', ['条形码', 'Code128', 'EAN'], { deps: ['jsbarcode'] }),
 
@@ -267,7 +244,7 @@ export const TOOLS = [
   t('permission-test', '权限测试', 'browser', '摄像头/麦克风/定位/通知/剪贴板/文件系统', ['权限', '隐私', '测试']),
 
   /* ---------------- 趣味 ---------------- */
-  t('ascii-art', 'ASCII 艺术字', 'fun', '文字转 ASCII 大字、图片转字符画', ['ASCII', '艺术字', '字符']),
+  t('ascii-art', 'ASCII 艺术字', 'fun', '文字转 ASCII 大字、图片转字符画、像素画（已合并图片转 ASCII）', ['ASCII', '艺术字', '字符', '图片转ASCII', '像素画']),
   t('pixel-editor', '像素画板', 'fun', '像素画、涂鸦板、签名板', ['像素', '涂鸦', '画板']),
   t('mandala-gen', '曼陀罗生成', 'fun', '对称曼陀罗、分形图案、迷宫生成', ['曼陀罗', '分形', '迷宫']),
   t('meme-gen', '表情包生成', 'fun', '图片加文字，生成表情包/梗图', ['表情包', '梗图', '文字']),
@@ -281,14 +258,14 @@ export const TOOLS = [
   t('input-assist', '输入辅助工作台', 'input', '全半角、标点转换、短语、快捷回复、候选排序、词频', ['输入法', '全角', '短语', '候选词'], { hot: true }),
   t('ime-schemes', '输入方案查询', 'input', '双拼、五笔字根、仓颉码、注音符号查询', ['双拼', '五笔', '仓颉', '注音']),
   t('handwriting', '手写板测试', 'input', '手写绘制、笔迹粗细与颜色、导出 PNG', ['手写', '画板', '笔迹']),
-  t('clipboard-pro', '剪贴板工作台', 'input', '读取文本/图片、格式识别、清理、哈希、二维码', ['剪贴板', '读取', '清理', '哈希'], { hot: true }),
+  t('clipboard-pro', '剪贴板工作台', 'input', '读取文本/图片、格式识别、清理、哈希、二维码；含简易写入与格式转换（已合并剪贴板工具）', ['剪贴板', '读取', '清理', '哈希', '写入', '格式转换'], { hot: true }),
   t('dragdrop-pro', '拖放工作台', 'input', '文件类型、大小、哈希、目录树、信息提取', ['拖放', '文件', '目录树', '提取']),
 
   /* ---------------- 打印与扫描 ---------------- */
   t('print-workbench', '打印工作台', 'print', '纸张、边距、出血、裁切线、打印 CSS、页眉页脚', ['打印', '出血', '裁切线', 'CSS'], { hot: true }),
   t('imposition', '拼版计算', 'print', 'N 拼版、名片、证件照、小册子、书脊厚度', ['拼版', '名片', '证件照', '小册子']),
   t('scan-clean', '扫描件处理', 'print', '旋转、裁剪、对比度、去底色、二值化、转 PDF', ['扫描', '去底色', '二值化', 'PDF'], { deps: ['pdflib'] }),
-  t('scan-ocr', '扫描 OCR', 'print', '批量识别、去重、脱敏、关键词、CSV/JSON 导出', ['OCR', '扫描', '批量', '脱敏'], { deps: ['tesseract'] }),
+  t('scan-ocr', '扫描 OCR', 'print', '批量识别、去重、脱敏、关键词、CSV/JSON 导出；含单图 OCR（已合并图片 OCR）', ['OCR', '扫描', '批量', '脱敏', '图片OCR', '文字识别'], { deps: ['tesseract'] }),
 
   /* ---------------- 表单与考试 ---------------- */
   t('form-builder', '表单生成器', 'form', '字段设计、校验规则、HTML/JSON/Schema 输出', ['表单', '校验', 'Schema', 'HTML']),
@@ -310,7 +287,7 @@ export const TOOLS = [
 
   /* ---------------- 健康与生活 ---------------- */
   t('vitals-log', '健康记录', 'wellness', '血压/血糖/体温/体重/血氧、趋势、CSV、紧急卡', ['健康', '血压', '血糖', '趋势'], { hot: true }),
-  t('sleep-pro', '睡眠与作息', 'wellness', '睡眠周期、睡眠债务、效率、咖啡因、时差、小睡', ['睡眠', '作息', '时差', '咖啡因']),
+  t('sleep-pro', '睡眠与作息', 'wellness', '睡眠周期、睡眠债务、效率、咖啡因、时差、小睡（已合并睡眠计算）', ['睡眠', '作息', '时差', '咖啡因', '睡眠计算', '睡眠周期']),
   t('mind-care', '心理与冥想', 'wellness', '情绪/压力/感恩日记、4-7-8/箱式呼吸、冥想计时', ['情绪', '压力', '呼吸', '冥想']),
   t('nutrition', '营养烹饪', 'wellness', '食谱缩放、杯克换算、烤箱温度、宏量、咖啡/盐水', ['营养', '烹饪', '热量', '换算']),
   t('fitness', '运动健身', 'wellness', '配速、分段、骑行功率、心率区间、TRIMP、1RM', ['健身', '配速', '心率', '1RM']),
@@ -334,7 +311,7 @@ export const TOOLS = [
   t('codegen-pro', '代码生成扩展', 'devops', 'JSON→Zod/Yup/Prisma/Mongoose/GraphQL/Protobuf', ['Zod', 'Prisma', 'GraphQL', '代码生成']),
 
   /* ---------------- 媒体与创作 ---------------- */
-  t('subtitle-tools', '字幕工作台', 'mediapro', 'SRT/VTT/ASS 互转、偏移、缩放、合并、QC', ['字幕', 'SRT', 'VTT', 'ASS'], { hot: true }),
+  t('subtitle-tools', '字幕工作台', 'mediapro', 'SRT/VTT/ASS 互转、偏移、缩放、合并、QC；含转换引擎与纯文本导出（已合并字幕转换）', ['字幕', 'SRT', 'VTT', 'ASS', '字幕转换', '时间轴'], { hot: true }),
   t('ebook-tools', '电子书与漫画', 'mediapro', 'EPUB 元数据/目录/封面/正文，CBZ 转 PDF', ['EPUB', 'CBZ', '漫画', 'PDF'], { deps: ['jszip', 'pdflib'] }),
   t('video-calc', '视频计算', 'mediapro', '码率体积、时间码、变速、缩放、平台尺寸、安全区', ['视频', '码率', '时间码', '尺寸']),
   t('audio-analyze', '音频分析', 'mediapro', '峰值、RMS、动态范围、DC 偏移、立体声兼容', ['音频', '响度', '峰值', 'RMS']),
@@ -385,13 +362,12 @@ export const TOOLS = [
   /* ---------------- 文件转换 ---------------- */
   t('convert-all', '转换工作台', 'convert', '音视频/图片/文档/字幕/PDF/表格/压缩包一站式批量转换', ['格式转换', '批量', '转换台', '本地处理'], { hot: true }),
   t('convert-video', '视频转换', 'convert', '16 种输出：MP4/WEBM/MKV/MOV/AVI/TS/FLV/WMV/GIF，可只提取音轨', ['视频转换', 'mp4', 'webm', 'gif', '压缩']),
-  t('convert-audio', '音频转换', 'convert', '10 种输出与码率/采样率/声道/位深参数，覆盖 MP3/FLAC/OGG/M4A', ['音频转换', 'mp3', 'flac', 'm4a']),
-  t('convert-image', '图片格式转换', 'convert', 'JPG/PNG/WEBP/AVIF/BMP/TIFF/ICO/SVG/PDF 九类输出', ['图片转换', 'avif', 'webp', 'ico', 'tiff']),
-  t('convert-doc', '文档转换', 'convert', 'DOCX/ODT/RTF/EPUB/HTML/MD/TXT/PDF 互转', ['文档转换', 'docx', 'epub', 'md', 'pdf']),
-  t('convert-sheet', '表格转换', 'convert', 'XLSX/CSV/TSV/JSON/HTML 互转，保留工作表结构', ['表格转换', 'xlsx', 'csv', 'json']),
-  t('convert-subtitle', '字幕转换', 'convert', 'SRT/VTT/ASS 互转，支持时间轴整体偏移与纯文本导出', ['字幕', 'srt', 'vtt', 'ass']),
-  t('convert-pdf', 'PDF 工具箱', 'convert', '26 项操作：转图/转文本/转 HTML/CBZ、拆分拼版、小册子、水印、Bates、压缩', ['PDF', '合并', '拆分', '压缩', '转图'], { hot: true }),
-  t('convert-archive', '压缩包处理', 'convert', '解压与重新打包 ZIP，可筛选条目后重新生成', ['zip', '解压', '压缩包'])
+  t('convert-audio', '音频转换', 'convert', '10 种输出与码率/采样率/声道/位深参数，覆盖 MP3/FLAC/OGG/M4A；可从视频提取音轨（已合并音频转换）', ['音频转换', 'mp3', 'flac', 'm4a', '视频转音频', 'wav', '提取音频']),
+  t('convert-image', '图片格式转换', 'convert', 'JPG/PNG/WEBP/AVIF/BMP/TIFF/ICO/SVG/PDF 九类输出，可调质量与尺寸，多图合成 PDF（已合并缩放转换、图片转 PDF）', ['图片转换', 'avif', 'webp', 'ico', 'tiff', '缩放', '批量缩放', '图片转pdf']),
+  t('convert-doc', '文档转换', 'convert', 'DOCX/ODT/RTF/EPUB/HTML/MD/TXT/PDF 互转；含 Markdown↔HTML、纯文本与目录生成（已合并 Markdown 转换）', ['文档转换', 'docx', 'epub', 'md', 'pdf', 'markdown', '目录生成']),
+  t('convert-sheet', '表格转换', 'convert', 'XLSX/CSV/TSV/JSON/HTML/Markdown 表格互转，保留工作表结构（已合并 Excel 转换、CSV 与 JSON、表格格式转换）', ['表格转换', 'xlsx', 'csv', 'json', 'excel', 'csv转json', 'markdown表格']),
+  t('convert-pdf', 'PDF 工具箱', 'convert', '合并拆分、转图/转文本/转 HTML/CBZ、拼版小册子、水印页码、Bates、压缩、元数据、手写签名（已合并 6 个 PDF 工具）', ['PDF', '合并', '拆分', '压缩', '转图', 'PDF转图片', 'PDF文本提取', '水印', '页码', 'PDF信息'], { hot: true }),
+  t('convert-archive', '压缩包处理', 'convert', '解压与重新打包 ZIP，可筛选条目后重新生成；含打包下载与 ZIP 内文件提取（已合并 ZIP 工具）', ['zip', '解压', '压缩包', '打包', '提取']),
 ];
 
 export const TOOL_MAP = Object.fromEntries(TOOLS.map((x) => [x.id, x]));
