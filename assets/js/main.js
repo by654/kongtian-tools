@@ -1,8 +1,8 @@
-import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=13';
-import { MERGED, ALIAS, mountMerged } from './core/merge.js?v=13';
+import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=14';
+import { MERGED, ALIAS, mountMerged } from './core/merge.js?v=14';
 import { icon, esc, copy, toast } from './core/ui.js';
 import { loadDeps, isLoaded, DEPS } from './core/deps.js';
-import { watchActionButtons } from './core/polish.js?v=13';
+import { watchActionButtons } from './core/polish.js?v=14';
 
 const view = document.getElementById('view');
 const sideNav = document.getElementById('side-nav');
@@ -429,7 +429,7 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=13`);
+    const mod = await import(`./tools/${tool.cat}.js?v=14`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);

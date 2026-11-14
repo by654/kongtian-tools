@@ -1,6 +1,7 @@
 /* 科学、化学、物理与实验 */
 import { esc, copy, toast, download } from '../core/ui.js';
 import { calcWorkbench } from '../core/workbench.js';
+import { inkLine, inkMuted } from '../core/theme.js';
 
 const $ = (root, s) => root.querySelector(s);
 
@@ -161,7 +162,7 @@ export default {
       if (!rows.length) return;
       const xs = rows.map((r) => r[0]), ys = rows.map((r) => r[1]);
       const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
-      g.strokeStyle = 'rgba(255,255,255,.1)';
+      g.strokeStyle = inkLine(.1);
       for (let i = 0; i < 5; i++) { const y = 20 + i * 58; g.beginPath(); g.moveTo(40, y); g.lineTo(740, y); g.stroke(); }
       g.strokeStyle = '#38cdf0'; g.lineWidth = 2; g.beginPath();
       rows.forEach(([x, y], i) => {
@@ -170,7 +171,7 @@ export default {
         i ? g.lineTo(px, py) : g.moveTo(px, py);
       });
       g.stroke();
-      g.fillStyle = '#8b9bb8'; g.font = '11px sans-serif';
+      g.fillStyle = inkMuted(); g.font = '11px sans-serif';
       g.fillText(`X: ${minX} – ${maxX}`, 40, 296);
       g.fillText(`Y: ${minY} – ${maxY}`, 640, 296);
     };

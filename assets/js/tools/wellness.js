@@ -1,6 +1,7 @@
 /* 健康、睡眠、心理、营养与运动 */
 import { esc, copy, toast, download } from '../core/ui.js';
 import { calcWorkbench } from '../core/workbench.js';
+import { inkMuted, inkLine } from '../core/theme.js';
 
 const $ = (root, s) => root.querySelector(s);
 const today = () => new Date().toISOString().slice(0, 10);
@@ -54,10 +55,10 @@ export default {
       const vals2 = rows.map((r) => r.v2).filter((v) => v != null);
       const all = [...vals, ...vals2];
       if (!all.length) {
-        g.fillStyle = '#8b9bb8'; g.font = '14px sans-serif'; g.textAlign = 'center'; g.fillText('还没有记录', cv.width / 2, 130); g.textAlign = 'left';
+        g.fillStyle = inkMuted(); g.font = '14px sans-serif'; g.textAlign = 'center'; g.fillText('还没有记录', cv.width / 2, 130); g.textAlign = 'left';
       } else {
         const min = Math.min(...all) * 0.95, max = Math.max(...all) * 1.05 || 1;
-        g.strokeStyle = 'rgba(255,255,255,.08)';
+        g.strokeStyle = inkLine(.08,.14);
         for (let i = 0; i < 5; i++) { const y = 20 + i * 50; g.beginPath(); g.moveTo(40, y); g.lineTo(740, y); g.stroke(); }
         const drawLine = (arr, color) => {
           g.strokeStyle = color; g.lineWidth = 2; g.beginPath();
@@ -70,7 +71,7 @@ export default {
         };
         drawLine(vals, '#38cdf0');
         if (vals2.length) drawLine(vals2, '#f472b6');
-        g.fillStyle = '#8b9bb8'; g.font = '11px sans-serif';
+        g.fillStyle = inkMuted(); g.font = '11px sans-serif';
         g.fillText(`${min.toFixed(1)} – ${max.toFixed(1)} ${unit[type]}`, 40, 252);
       }
       $('#vl-list').innerHTML = list.length ? `<table class="tbl"><tr><th>日期</th><th>类型</th><th>数值</th><th>备注</th><th></th></tr>${list.slice().reverse().map((r) => `<tr><td>${r.date}</td><td>${label[r.type]}</td><td class="mono">${r.v1}${r.v2 != null ? ' / ' + r.v2 : ''} ${unit[r.type]}</td><td>${esc(r.note || '')}</td><td><button class="btn sm danger" data-del="${r.id}">删</button></td></tr>`).join('')}</table>` : '<div class="hint">还没有记录</div>';

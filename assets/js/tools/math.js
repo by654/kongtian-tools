@@ -1,5 +1,6 @@
 /* 数学、计算与单位换算 */
 import { esc, copy, toast } from '../core/ui.js';
+import { inkLine, inkMuted } from '../core/theme.js';
 
 const n = (id) => Number(document.getElementById(id)?.value || 0);
 const q = (root, s) => root.querySelector(s);
@@ -490,7 +491,7 @@ export default {
         const cv = $('#eq-canvas'), g = cv.getContext('2d');
         const W = cv.width, H = cv.height;
         g.clearRect(0, 0, W, H);
-        g.strokeStyle = 'rgba(255,255,255,.1)'; g.lineWidth = 1;
+        g.strokeStyle = inkLine(.1); g.lineWidth = 1;
         for (let x = 0; x <= W; x += 38) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke(); }
         for (let y = 0; y <= H; y += 38) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
         g.strokeStyle = 'rgba(139,155,184,.5)'; g.beginPath(); g.moveTo(0, H / 2); g.lineTo(W, H / 2); g.moveTo(W / 2, 0); g.lineTo(W / 2, H); g.stroke();
@@ -507,7 +508,7 @@ export default {
           if (!started) { g.moveTo(px, py); started = true; } else g.lineTo(px, py);
         }
         g.stroke();
-        g.fillStyle = '#8b9bb8'; g.font = '12px sans-serif';
+        g.fillStyle = inkMuted(); g.font = '12px sans-serif';
         g.fillText('x: -10 … 10', 10, H - 10);
         $('#eq-meta').textContent = '已绘制 ' + expr;
       } catch (e) { $('#eq-meta').textContent = '错误：' + e.message; }

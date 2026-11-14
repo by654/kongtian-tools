@@ -2,6 +2,7 @@
 import { esc, copy, toast, download } from '../core/ui.js';
 import { bindFileZone, fileZone } from '../core/kit.js';
 import { calcWorkbench } from '../core/workbench.js';
+import { inkMuted } from '../core/theme.js';
 
 const $ = (root, s) => root.querySelector(s);
 const rad = Math.PI / 180;
@@ -185,7 +186,7 @@ export default {
       g.strokeStyle = '#38cdf0'; g.lineWidth = 2; g.beginPath();
       eles.forEach((e, i) => { const x = 24 + i / Math.max(1, eles.length - 1) * 712, y = 210 - (e - min) / (max - min || 1) * 180; i ? g.lineTo(x, y) : g.moveTo(x, y); });
       g.stroke();
-      g.fillStyle = '#8b9bb8'; g.font = '11px sans-serif'; g.fillText(`海拔 ${min}–${max} m`, 24, 230);
+      g.fillStyle = inkMuted(); g.font = '11px sans-serif'; g.fillText(`海拔 ${min}–${max} m`, 24, 230);
     };
     $('#tt-run').onclick = () => { if (!pts.length) return toast('请选择 GPX', 'err'); stats(); };
     $('#tt-simplify').onclick = () => {
