@@ -142,7 +142,14 @@ const P = {
   upload: '<path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
   check: '<path d="m4 12 5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
   lock: '<rect x="4.5" y="10" width="15" height="10" rx="2.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10" stroke="currentColor" stroke-width="1.7" fill="none"/>',
-  bolt: '<path d="m13 2-8 12h6l-1 8 9-13h-6l0-7Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>'
+  bolt: '<path d="m13 2-8 12h6l-1 8 9-13h-6l0-7Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>',
+  keyboard: '<rect x="3" y="6" width="18" height="12" rx="2.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M6.5 10h.01M9.5 10h.01M12.5 10h.01M15.5 10h.01M18 10h.01M7 14h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  printer: '<path d="M6 9V4h12v5" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><rect x="4" y="9" width="16" height="8" rx="2" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M7 16h10v5H7z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
+  award: '<circle cx="12" cy="9" r="5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="m8.5 13-1.5 8 5-3 5 3-1.5-8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
+  flask: '<path d="M9 3h6M10 3v6L5 19a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 19L14 9V3" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><path d="M7.5 15h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  globe: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" stroke-width="1.5" fill="none"/>',
+  chip: '<rect x="6" y="6" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  compass: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="m15 9-2 4-4 2 2-4 4-2Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/>'
 };
 
 export function icon(name, size = 18) {

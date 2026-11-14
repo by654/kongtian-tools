@@ -1,4 +1,4 @@
-import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js';
+﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=7';
 import { icon, esc, copy, toast } from './core/ui.js';
 import { loadDeps, isLoaded, DEPS } from './core/deps.js';
 
@@ -123,6 +123,18 @@ function toolGrid(list) {
   return `<div class="tool-grid">${list.map(toolCard).join('')}</div>`;
 }
 
+function countUp(el, target, dur = 900) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = target; return; }
+  const t0 = performance.now();
+  const step = (t) => {
+    const p = Math.min(1, (t - t0) / dur);
+    const ease = 1 - (1 - p) ** 3;
+    el.textContent = Math.round(target * ease);
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
 /* ---------------- 首页 ---------------- */
 function renderHome() {
   const hot = TOOLS.filter((x) => x.hot);
@@ -182,6 +194,10 @@ function renderHome() {
     <div class="center hint" style="margin-top:26px">空天工具合集 · 纯前端 · 文件不上传 · 支持手机与电脑</div>
   `;
   const input = document.getElementById('hero-search');
+  document.querySelectorAll('.hero-stats b').forEach((el) => {
+    const target = parseInt(el.textContent.replace(/[^\d]/g, ''), 10);
+    if (!isNaN(target) && target > 0) countUp(el, target);
+  });
   const go = () => { const q = input.value.trim(); location.hash = q ? `#/all?q=${encodeURIComponent(q)}` : '#/all'; };
   document.getElementById('hero-go').addEventListener('click', go);
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
@@ -390,7 +406,7 @@ async function renderTool(id) {
       </div>
     </div>
     <div class="dep-area" id="dep-area"></div>
-    <div id="tool-root"><div class="loading-wrap"><span class="spinner"></span>正在加载工具模块…</div></div>
+    <div id="tool-root"><div class="skeleton-wrap"><div class="skeleton w40"></div><div class="skeleton h120"></div><div class="skeleton h180"></div><div class="skeleton w60"></div></div><div class="hint center" style="margin-top:10px">正在加载工具模块…</div></div>
     ${related.length ? `<div class="section-title"><h2>同类工具</h2></div>${toolGrid(related)}` : ''}
   `;
   renderSidebar();
@@ -404,7 +420,7 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=5`);
+    const mod = await import(`./tools/${tool.cat}.js?v=7`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);
@@ -435,6 +451,12 @@ function render() {
   view.classList.remove('page-in');
   void view.offsetWidth;
   view.classList.add('page-in');
+  const bar = document.getElementById('route-progress');
+  if (bar) {
+    bar.classList.remove('run');
+    void bar.offsetWidth;
+    bar.classList.add('run');
+  }
   const { parts, query } = parseRoute();
   const name = routeName();
   if (name === 'home') renderHome();
@@ -540,8 +562,13 @@ document.addEventListener('keydown', (e) => {
 
 /* ---------------- 启动 ---------------- */
 window.addEventListener('hashchange', () => {
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  render();
+  const go = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    render();
+  };
+  if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.startViewTransition(go);
+  } else go();
 });
 render();
 

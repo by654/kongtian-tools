@@ -24,7 +24,22 @@ export const CATEGORIES = [
   { id: 'office', name: '办公模板', icon: 'office', desc: '周报、简历、发票、大纲' },
   { id: 'browser', name: '浏览器测试', icon: 'browser', desc: '信息、特性、权限检测' },
   { id: 'fun', name: '趣味艺术', icon: 'fun', desc: 'ASCII、像素画、壁纸、梗图' },
-  { id: 'ai', name: '本地智能', icon: 'ai', desc: '摘要、关键词、情感分析' }
+  { id: 'ai', name: '本地智能', icon: 'ai', desc: '摘要、关键词、情感分析' },
+  { id: 'input', name: '输入与剪贴板', icon: 'keyboard', desc: '输入法、剪贴板、拖放文件' },
+  { id: 'print', name: '打印与扫描', icon: 'printer', desc: '拼版、打印 CSS、扫描增强' },
+  { id: 'form', name: '表单与考试', icon: 'data', desc: '表单、问卷、评分统计' },
+  { id: 'studio', name: '证书与白板', icon: 'award', desc: '徽章、证书、白板与投票' },
+  { id: 'science', name: '科学与工程', icon: 'flask', desc: '元素、化学、物理、工程' },
+  { id: 'wellness', name: '健康与生活', icon: 'life', desc: '健康记录、睡眠、心理、营养' },
+  { id: 'business', name: '商业与组织', icon: 'office', desc: '财税、HR、销售、采购、项目' },
+  { id: 'devops', name: '开发运维', icon: 'dev', desc: '配置、数据库、API、日志' },
+  { id: 'mediapro', name: '媒体与创作', icon: 'media', desc: '字幕、电子书、视频、音频' },
+  { id: 'webpro', name: 'Web 与设计', icon: 'browser', desc: 'CSS 艺术、i18n、SEO、PWA' },
+  { id: 'studypro', name: '学习与教育', icon: 'learn', desc: '语言、成语、教务、引用' },
+  { id: 'lifepro', name: '出行与法律', icon: 'compass', desc: '旅行、汽车、合同、职业' },
+  { id: 'funpro', name: '游戏与生成', icon: 'fun', desc: '数值、精灵图、谜题、生成艺术' },
+  { id: 'geoext', name: '地图与天文', icon: 'globe', desc: '坐标、瓦片、轨迹、气象' },
+  { id: 'infra', name: '设备与协议', icon: 'chip', desc: '硬件、WebRTC、IoT、3D' }
 ];
 
 export const TOOLS = [
@@ -259,7 +274,112 @@ export const TOOLS = [
 
   /* ---------------- 本地智能 ---------------- */
   t('ai-summary', '本地摘要', 'ai', 'TextRank/TF-IDF 关键词与摘要，纯本地计算', ['摘要', '关键词', 'TextRank']),
-  t('ai-sentiment', '文本情感分析', 'ai', '本地词典情感倾向、敏感词与可读性', ['情感', '倾向', '分析'])
+  t('ai-sentiment', '文本情感分析', 'ai', '本地词典情感倾向、敏感词与可读性', ['情感', '倾向', '分析']),
+
+  /* ---------------- 输入与剪贴板 ---------------- */
+  t('input-assist', '输入辅助工作台', 'input', '全半角、标点转换、短语、快捷回复、候选排序、词频', ['输入法', '全角', '短语', '候选词'], { hot: true }),
+  t('ime-schemes', '输入方案查询', 'input', '双拼、五笔字根、仓颉码、注音符号查询', ['双拼', '五笔', '仓颉', '注音']),
+  t('handwriting', '手写板测试', 'input', '手写绘制、笔迹粗细与颜色、导出 PNG', ['手写', '画板', '笔迹']),
+  t('clipboard-pro', '剪贴板工作台', 'input', '读取文本/图片、格式识别、清理、哈希、二维码', ['剪贴板', '读取', '清理', '哈希'], { hot: true }),
+  t('dragdrop-pro', '拖放工作台', 'input', '文件类型、大小、哈希、目录树、信息提取', ['拖放', '文件', '目录树', '提取']),
+
+  /* ---------------- 打印与扫描 ---------------- */
+  t('print-workbench', '打印工作台', 'print', '纸张、边距、出血、裁切线、打印 CSS、页眉页脚', ['打印', '出血', '裁切线', 'CSS'], { hot: true }),
+  t('imposition', '拼版计算', 'print', 'N 拼版、名片、证件照、小册子、书脊厚度', ['拼版', '名片', '证件照', '小册子']),
+  t('scan-clean', '扫描件处理', 'print', '旋转、裁剪、对比度、去底色、二值化、转 PDF', ['扫描', '去底色', '二值化', 'PDF'], { deps: ['pdflib'] }),
+  t('scan-ocr', '扫描 OCR', 'print', '批量识别、去重、脱敏、关键词、CSV/JSON 导出', ['OCR', '扫描', '批量', '脱敏'], { deps: ['tesseract'] }),
+
+  /* ---------------- 表单与考试 ---------------- */
+  t('form-builder', '表单生成器', 'form', '字段设计、校验规则、HTML/JSON/Schema 输出', ['表单', '校验', 'Schema', 'HTML']),
+  t('survey-builder', '问卷生成器', 'form', '题目设计、逻辑、评分、离线填写包、二维码', ['问卷', '离线', '二维码'], { deps: ['qrcode'] }),
+  t('survey-stats', '问卷统计', 'form', 'CSV/JSON 结果统计、频率分布、汇总导出', ['问卷', '统计', '频率']),
+  t('exam-tool', '考试与评分', 'form', '题库、随机组卷、评分、成绩统计与分布', ['考试', '组卷', '评分', '统计'], { hot: true }),
+
+  /* ---------------- 证书与白板 ---------------- */
+  t('badge-gen', '徽章生成器', 'studio', '徽章 SVG/PNG、批量、编号、二维码', ['徽章', 'SVG', '批量', '二维码'], { deps: ['qrcode', 'jszip'] }),
+  t('cert-gen', '证书生成器', 'studio', '奖状/结业/参赛/志愿者/培训证书，批量与校验码', ['证书', '奖状', '批量', '校验'], { deps: ['qrcode', 'jszip'], hot: true }),
+  t('whiteboard', '白板与投票', 'studio', '画笔、形状、模板、自动保存、PNG/SVG/JSON、投票', ['白板', '模板', '投票', '导出'], { hot: true }),
+
+  /* ---------------- 科学与工程 ---------------- */
+  t('periodic-table', '元素周期表', 'science', '118 种元素查询、原子量、分类与搜索', ['元素', '周期表', '原子量']),
+  t('chem-calc', '化学计算', 'science', '摩尔质量、浓度、稀释、pH、理想气体、计量', ['化学', '摩尔', 'pH', '浓度']),
+  t('physics-calc', '物理计算', 'science', '运动、力、功、能量、压强、浮力、欧姆定律、波', ['物理', '力学', '电学', '波']),
+  t('engineering-calc', '工程计算', 'science', '齿轮、扭矩、皮带、材料重量、公差、比例', ['工程', '齿轮', '扭矩', '材料']),
+  t('lab-record', '实验记录', 'science', '实验信息、数据表、折线图、CSV 与 Markdown 导出', ['实验', '记录', '数据', '图表']),
+
+  /* ---------------- 健康与生活 ---------------- */
+  t('vitals-log', '健康记录', 'wellness', '血压/血糖/体温/体重/血氧、趋势、CSV、紧急卡', ['健康', '血压', '血糖', '趋势'], { hot: true }),
+  t('sleep-pro', '睡眠与作息', 'wellness', '睡眠周期、睡眠债务、效率、咖啡因、时差、小睡', ['睡眠', '作息', '时差', '咖啡因']),
+  t('mind-care', '心理与冥想', 'wellness', '情绪/压力/感恩日记、4-7-8/箱式呼吸、冥想计时', ['情绪', '压力', '呼吸', '冥想']),
+  t('nutrition', '营养烹饪', 'wellness', '食谱缩放、杯克换算、烤箱温度、宏量、咖啡/盐水', ['营养', '烹饪', '热量', '换算']),
+  t('fitness', '运动健身', 'wellness', '配速、分段、骑行功率、心率区间、TRIMP、1RM', ['健身', '配速', '心率', '1RM']),
+  t('interval-timer', '间歇计时器', 'wellness', 'Tabata、HIIT、EMOM、AMRAP 与自定义计时', ['HIIT', 'Tabata', '计时', '训练']),
+  t('garden-pet', '园艺与宠物', 'wellness', '浇水施肥提醒、NPK、堆肥、宠物年龄与喂食', ['园艺', '宠物', '提醒', 'NPK']),
+
+  /* ---------------- 商业与组织 ---------------- */
+  t('finance-pro', '财税计算', 'business', '个税、年终奖、增值税、折旧、NPV/IRR、盈亏平衡', ['个税', '增值税', 'NPV', 'IRR'], { hot: true }),
+  t('hr-tools', 'HR 招聘模板', 'business', 'JD、面试问题、评分表、入职/离职、Offer 对比', ['HR', '招聘', 'JD', '面试']),
+  t('sales-crm', '销售与 CRM', 'business', '销售漏斗、线索评分、目标拆解、佣金、NPS、流失', ['销售', 'CRM', '漏斗', 'NPS']),
+  t('procurement', '采购与库存', 'business', '安全库存、再订货点、EOQ、周转率、库龄', ['采购', '库存', 'EOQ', '周转']),
+  t('project-pro', '项目管理模板', 'business', 'WBS、RACI、风险登记、里程碑、章程、验收', ['项目', 'WBS', 'RACI', '风险']),
+  t('risk-support', '风险合规与客服', 'business', 'GDPR/安全/灾备清单、政策生成、工单 SLA', ['合规', 'GDPR', 'SLA', '政策']),
+
+  /* ---------------- 开发运维 ---------------- */
+  t('config-gen', '配置生成器', 'devops', 'Docker/K8s/CI/Nginx/Caddy/安全头/环境变量', ['Docker', 'K8s', 'CI', 'Nginx'], { hot: true }),
+  t('db-design', '数据库设计', 'devops', 'SQL 解析、数据字典、TypeScript/Go/Java/Python、迁移', ['数据库', 'SQL', 'ER', '迁移']),
+  t('api-tools', 'API 工具', 'devops', 'OpenAPI→Markdown/TS/Mock、GraphQL、HAR→cURL', ['OpenAPI', 'GraphQL', 'HAR', 'API']),
+  t('log-analyzer', '日志分析', 'devops', '级别统计、错误聚合、时间线、脱敏、CSV/JSON', ['日志', '错误', '时间线', '脱敏']),
+  t('regex-pro', '正则与文本算法', 'devops', '性能测试、glob 互转、批量相似度、TF-IDF', ['正则', 'glob', '相似度', 'TF-IDF']),
+  t('codegen-pro', '代码生成扩展', 'devops', 'JSON→Zod/Yup/Prisma/Mongoose/GraphQL/Protobuf', ['Zod', 'Prisma', 'GraphQL', '代码生成']),
+
+  /* ---------------- 媒体与创作 ---------------- */
+  t('subtitle-tools', '字幕工作台', 'mediapro', 'SRT/VTT/ASS 互转、偏移、缩放、合并、QC', ['字幕', 'SRT', 'VTT', 'ASS'], { hot: true }),
+  t('ebook-tools', '电子书与漫画', 'mediapro', 'EPUB 元数据/目录/封面/正文，CBZ 转 PDF', ['EPUB', 'CBZ', '漫画', 'PDF'], { deps: ['jszip', 'pdflib'] }),
+  t('video-calc', '视频计算', 'mediapro', '码率体积、时间码、变速、缩放、平台尺寸、安全区', ['视频', '码率', '时间码', '尺寸']),
+  t('audio-analyze', '音频分析', 'mediapro', '峰值、RMS、动态范围、DC 偏移、立体声兼容', ['音频', '响度', '峰值', 'RMS']),
+  t('music-theory', '音乐理论', 'mediapro', '音名频率、音程、移调、和弦、五度圈、MIDI/BPM', ['音乐', '音程', '和弦', 'MIDI']),
+  t('audio-gen', '音效生成', 'mediapro', '白/粉/棕噪音、双耳节拍、扫频音效', ['音效', '噪音', '双耳节拍']),
+
+  /* ---------------- Web 与设计 ---------------- */
+  t('css-art', 'CSS 艺术', 'webpro', '形状、clip-path、遮罩、混合、滤镜、3D、滚动动画', ['CSS', 'clip-path', '滤镜', '3D']),
+  t('i18n-tools', '国际化工具', 'webpro', '语言包对比、缺失键、CSV↔JSON、伪本地化、RTL', ['i18n', '语言包', 'RTL', 'CSV']),
+  t('a11y-pro', '无障碍工具', 'webpro', 'ARIA 查询、焦点顺序、WCAG 清单、对比度', ['无障碍', 'ARIA', 'WCAG', '焦点']),
+  t('seo-pro', 'SEO 扩展', 'webpro', 'SERP 预览、JSON-LD、批量长度检查、sitemap', ['SEO', 'SERP', 'JSON-LD', 'sitemap'], { hot: true }),
+  t('pwa-tools', 'PWA 工具', 'webpro', 'Manifest 校验、缓存策略、本地存储查看', ['PWA', 'Manifest', '缓存', '存储']),
+  t('perf-panel', '性能与存储', 'webpro', '导航/资源耗时、FPS、内存、存储配额', ['性能', 'FPS', '内存', '资源']),
+
+  /* ---------------- 学习与教育 ---------------- */
+  t('language-lab', '语言实验室', 'studypro', '日语变形、西法德冠词、英语时态、音标与字母', ['日语', '英语', '西班牙语', '音标']),
+  t('idioms', '成语与词汇', 'studypro', '成语接龙/填空、近反义词、英语词根', ['成语', '近义词', '词根', '接龙']),
+  t('teaching', '教育行政', 'studypro', '课程表、座位表、值日表、教案模板', ['课程表', '座位表', '教案', '值日']),
+  t('citation', '学术引用', 'studypro', 'BibTeX→APA/MLA/Chicago/RIS、DOI/ISBN/ISSN 校验', ['BibTeX', 'APA', 'MLA', 'DOI']),
+
+  /* ---------------- 出行与法律 ---------------- */
+  t('travel-tools', '旅行与户外', 'lifepro', '预算、徒步时间、行李重量、汇率、时区', ['旅行', '预算', '徒步', '行李']),
+  t('auto-tools', '汽车与交通', 'lifepro', '油耗、每公里成本、EV 续航、轮胎、保养、VIN', ['汽车', '油耗', 'EV', 'VIN']),
+  t('law-tools', '法律与合同', 'lifepro', '条款提取、风险词、NDA/授权书/委托书/声明', ['合同', '条款', 'NDA', '风险']),
+  t('career-tools', '求职与职业', 'lifepro', 'ATS 检查、STAR、薪资谈判、Offer 对比', ['求职', 'ATS', 'STAR', 'Offer']),
+  t('content-tools', '内容与社媒', 'lifepro', '内容日历、平台字数、Front Matter、RSS/Slug', ['内容', '社媒', 'RSS', 'Slug']),
+
+  /* ---------------- 游戏与生成 ---------------- */
+  t('game-dev', '游戏数值', 'funpro', '伤害公式、掉落率、经验曲线、掉落模拟', ['游戏', '伤害', '掉落', '经验']),
+  t('sprite-tools', '精灵图工具', 'funpro', '精灵表切图、动画预览、批量导出', ['精灵图', '切图', '动画'], { deps: ['jszip'] }),
+  t('puzzle-tools', '谜题工具', 'funpro', '24 点求解/出题、迷宫生成、记忆序列', ['24点', '迷宫', '记忆']),
+  t('random-pro', '随机扩展', 'funpro', '加权抽取、可复现种子、多轮统计', ['加权', '随机', '种子', '抽奖']),
+  t('gen-art', '生成艺术', 'funpro', 'L-system、Mandelbrot/Julia、万花尺', ['生成艺术', '分形', 'L-system']),
+
+  /* ---------------- 地图与天文 ---------------- */
+  t('coord-convert', '坐标转换', 'geoext', '度分秒↔十进制、批量 UTM、EPSG 查询', ['坐标', 'DMS', 'UTM', 'EPSG']),
+  t('map-grid', '地图分幅', 'geoext', '经纬度↔瓦片、比例尺、分辨率', ['地图', '瓦片', '比例尺', '分辨率']),
+  t('track-tools', '轨迹分析', 'geoext', 'GPX 距离/爬升/速度、简化、GeoJSON 导出', ['GPX', '轨迹', '爬升', '速度']),
+  t('weather-calc', '气象计算', 'geoext', '热指数、风寒、露点、气压高度、蒲福风级', ['天气', '热指数', '风寒', '露点']),
+  t('astro-calc', '天文计算', 'geoext', '望远镜倍率/视场、极限星等、天文单位、恒星时、月相', ['天文', '望远镜', '月相', '星等']),
+
+  /* ---------------- 设备与协议 ---------------- */
+  t('hardware-test', '硬件测试', 'infra', '电池、媒体设备、手柄、传感器、全屏、震动', ['硬件', '电池', '手柄', '传感器']),
+  t('webrtc-tools', 'WebRTC 工具', 'infra', '本地回环、SDP 格式化、设备枚举、统计', ['WebRTC', 'SDP', '回环', '设备']),
+  t('iot-tools', 'IoT 工具', 'infra', 'MQTT 主题/消息、传感器模拟、设备注册、二维码', ['IoT', 'MQTT', '传感器', '设备'], { deps: ['qrcode'] }),
+  t('xr3d-tools', '3D / XR 工具', 'infra', 'WebXR 检测、STL 体积面积、GLTF 结构统计', ['3D', 'WebXR', 'STL', 'GLTF'])
 ];
 
 export const TOOL_MAP = Object.fromEntries(TOOLS.map((x) => [x.id, x]));
