@@ -1,6 +1,6 @@
-/* 空天工具合集 · Service Worker
-   只缓存同源静态资源；第三方 CDN 依赖仍走网络（浏览器 HTTP 缓存）。 */
-const CACHE = 'kongtian-tools-v17';
+﻿/* 绌哄ぉ宸ュ叿鍚堥泦 路 Service Worker
+   鍙紦瀛樺悓婧愰潤鎬佽祫婧愶紱绗笁鏂?CDN 渚濊禆浠嶈蛋缃戠粶锛堟祻瑙堝櫒 HTTP 缂撳瓨锛夈€?*/
+const CACHE = 'kongtian-tools-v18';
 const SHELL = [
   './',
   './index.html',
@@ -44,7 +44,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 代码与样式优先走网络，避免更新后仍执行旧逻辑；离线时回退缓存
+  // 浠ｇ爜涓庢牱寮忎紭鍏堣蛋缃戠粶锛岄伩鍏嶆洿鏂板悗浠嶆墽琛屾棫閫昏緫锛涚绾挎椂鍥為€€缂撳瓨
   if (['script', 'style', 'worker', 'json'].includes(req.destination)) {
     event.respondWith(
       fetch(req).then((res) => {

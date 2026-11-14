@@ -136,7 +136,7 @@ const P = {
   browser: '<rect x="3" y="4" width="18" height="15" rx="2.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M3 8.5h18" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="6.3" r=".9" fill="currentColor"/><circle cx="8.8" cy="6.3" r=".9" fill="currentColor"/>',
   fun: '<path d="m12 3 1.9 4.6L19 9.5l-5.1 1.9L12 16l-1.9-4.6L5 9.5l5.1-1.9L12 3Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M18.5 15.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" fill="currentColor"/>',
   ai: '<rect x="7" y="7" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M10 10.5h4v4h-4zM12 3v4M12 17v4M3 12h4M17 12h4M5.5 5.5 8 8M16 16l2.5 2.5M18.5 5.5 16 8M8 16l-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-  search: '<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  search: '<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
   star: '<path d="m12 3.8 2.5 5.2 5.7.8-4.1 4 1 5.6L12 16.8l-5.1 2.6 1-5.6-4.1-4 5.7-.8L12 3.8Z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/>',
   clock: '<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 7v5.2l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   upload: '<path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
