@@ -64,7 +64,7 @@ export function mountMerged(root, ctx, spec, ownFn, initialTab) {
     try {
       let fn = sec.render;
       if (!fn) {
-        const mod = await import(`../tools/${sec.cat}.js?v=14`);
+        const mod = await import(`../tools/${sec.cat}.js?v=15`);
         fn = mod.default?.[sec.id];
       }
       if (typeof fn !== 'function') throw new Error('未找到实现：' + sec.id);
