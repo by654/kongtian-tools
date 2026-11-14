@@ -1,4 +1,4 @@
-﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=9';
+﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=10';
 import { icon, esc, copy, toast } from './core/ui.js';
 import { loadDeps, isLoaded, DEPS } from './core/deps.js';
 
@@ -420,7 +420,7 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=9`);
+    const mod = await import(`./tools/${tool.cat}.js?v=10`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);
@@ -557,7 +557,6 @@ window.addEventListener('hashchange', () => {
   render();
 });
 render();
-window.dispatchEvent(new Event('kt:ready'));
 
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => {

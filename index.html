@@ -14,75 +14,22 @@
 <link rel="apple-touch-icon" href="./assets/favicon.svg">
 <link rel="stylesheet" href="./assets/app.css" id="app-css">
 <style>
-  body.kt-booting{overflow:hidden}
-  #kt-boot{
-    position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
-    background:
-      radial-gradient(520px 320px at 78% 8%,rgba(129,140,248,.18),transparent 70%),
-      radial-gradient(420px 280px at 12% 86%,rgba(34,211,238,.12),transparent 70%),
-      #070b14;
-    color:#e9eefc;font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
-    opacity:1;transition:opacity .42s ease;
-  }
-  #kt-boot.done{opacity:0;pointer-events:none}
-  #kt-boot::before{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background-image:
-      radial-gradient(1.4px 1.4px at 18% 22%,#fff,transparent),
-      radial-gradient(1px 1px at 33% 68%,#b9e9ff,transparent),
-      radial-gradient(1.2px 1.2px at 57% 18%,#fff,transparent),
-      radial-gradient(1px 1px at 71% 58%,#d8d4ff,transparent),
-      radial-gradient(1.3px 1.3px at 86% 32%,#fff,transparent),
-      radial-gradient(1px 1px at 44% 84%,#a5f3fc,transparent);
-    background-repeat:no-repeat;
-  }
-  .kt-boot-card{
-    position:relative;width:min(420px,86vw);padding:30px 26px 24px;text-align:center;
-    border:1px solid rgba(255,255,255,.1);border-radius:20px;
-    background:rgba(14,22,38,.74);backdrop-filter:blur(16px);
-    box-shadow:0 24px 70px rgba(0,0,0,.5);
-  }
-  .kt-boot-logo{width:78px;height:78px;margin:0 auto 12px;position:relative}
-  .kt-boot-logo svg{width:100%;height:100%;animation:ktSpin 22s linear infinite;filter:drop-shadow(0 0 14px rgba(56,205,240,.35))}
-  @keyframes ktSpin{to{transform:rotate(360deg)}}
-  .kt-boot-card h1{font-size:20px;margin:0 0 4px;letter-spacing:.5px}
-  .kt-boot-card .sub{font-size:9.5px;letter-spacing:2.2px;color:#8b9bb8;font-weight:600;margin-bottom:16px}
-  .kt-boot-status{font-size:12.5px;color:#c3cfe6;margin:0 0 12px}
-  .kt-boot-bar{height:8px;border-radius:10px;background:rgba(255,255,255,.08);overflow:hidden}
-  .kt-boot-bar i{
-    display:block;height:100%;width:0;border-radius:10px;
-    background:linear-gradient(90deg,#22d3ee,#818cf8,#c084fc);
-    transition:width .28s ease;
-    box-shadow:0 0 14px rgba(56,205,240,.55);
-  }
-  .kt-boot-meta{display:flex;justify-content:space-between;gap:10px;font-size:10.5px;color:#8b9bb8;margin-top:8px}
-  .kt-boot-hint{font-size:11px;color:#66748d;line-height:1.6;margin-top:14px;min-height:34px}
-  .kt-boot-retry{
-    margin-top:12px;padding:8px 18px;border-radius:9px;border:1px solid rgba(56,205,240,.35);
-    background:rgba(56,205,240,.12);color:#67e8f9;font:inherit;font-size:12.5px;cursor:pointer;
-  }
+  html[data-theme="dark"],html[data-theme="dark"] body{background:#070b14;color:#e9eefc}
+  .boot-inline{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:12px;
+    font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    opacity:0;animation:bootReveal .25s .3s ease forwards}
+  .boot-inline .spinner{width:18px;height:18px;border:2px solid rgba(56,205,240,.25);border-top-color:#38cdf0;border-radius:50%;animation:bootSpin .8s linear infinite}
+  .boot-inline b{font-size:14px;font-weight:600;letter-spacing:.5px}
+  .boot-inline small{font-size:11px;color:#8b9bb8}
+  @keyframes bootReveal{to{opacity:1}}
+  @keyframes bootSpin{to{transform:rotate(360deg)}}
   @media (prefers-reduced-motion:reduce){
-    .kt-boot-logo svg{animation:none}
-    #kt-boot{transition:none}
-    .kt-boot-bar i{transition:none}
+    .boot-inline{opacity:1;animation:none}
+    .boot-inline .spinner{animation:none}
   }
 </style>
 </head>
-<body class="kt-booting">
-<div id="kt-boot" role="status" aria-live="polite" aria-busy="true">
-  <div class="kt-boot-card">
-    <div class="kt-boot-logo" aria-hidden="true">
-      <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="7" fill="url(#ktb1)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#ktb1)" stroke-width="2" transform="rotate(-28 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" stroke="url(#ktb2)" stroke-width="1.4" transform="rotate(32 24 24)" opacity=".7"/><circle cx="40" cy="16" r="2.4" fill="#67e8f9"/><defs><linearGradient id="ktb1" x1="4" y1="4" x2="44" y2="44"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#818cf8"/></linearGradient><linearGradient id="ktb2" x1="4" y1="44" x2="44" y2="4"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs></svg>
-    </div>
-    <h1>空天工具合集</h1>
-    <div class="sub">KONGTIAN TOOLBOX</div>
-    <p class="kt-boot-status" id="kt-boot-status">正在加载界面资源…</p>
-    <div class="kt-boot-bar" id="kt-boot-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="kt-boot-fill"></i></div>
-    <div class="kt-boot-meta"><span id="kt-boot-pct">0%</span><span>首次加载需要下载资源</span></div>
-    <div class="kt-boot-hint" id="kt-boot-hint">正在下载样式、脚本与工具索引，请稍候一会儿…</div>
-    <button class="kt-boot-retry" id="kt-boot-retry" hidden>重新加载</button>
-  </div>
-</div>
+<body>
 <div class="app" id="app">
   <aside class="sidebar" id="sidebar" aria-label="主导航">
     <a class="brand" href="#/">
@@ -121,7 +68,13 @@
         </a>
       </div>
     </header>
-    <div class="view" id="view"></div>
+    <div class="view" id="view">
+      <div class="boot-inline" role="status" aria-live="polite">
+        <span class="spinner"></span>
+        <b>正在加载…</b>
+        <small>首次打开需要下载资源，请稍候一会儿</small>
+      </div>
+    </div>
     <nav class="bottom-nav" id="bottom-nav">
       <a href="#/" data-nav="home"><svg viewBox="0 0 24 24"><path d="m4 10 8-6 8 6v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19v-9Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg><span>首页</span></a>
       <a href="#/all" data-nav="all"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="13" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="4" y="13" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="13" y="13" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/></svg><span>全部</span></a>
@@ -143,88 +96,6 @@
 </div>
 
 <div class="toast-wrap" id="toast-wrap"></div>
-<script>
-(function(){
-  var boot = document.getElementById('kt-boot');
-  var fill = document.getElementById('kt-boot-fill');
-  var pct = document.getElementById('kt-boot-pct');
-  var status = document.getElementById('kt-boot-status');
-  var hint = document.getElementById('kt-boot-hint');
-  var retry = document.getElementById('kt-boot-retry');
-  var bar = document.getElementById('kt-boot-bar');
-  if (!boot || !fill) return;
-  var target = 8, current = 0, ready = false, hidden = false, slow = false;
-  var start = Date.now();
-  var css = document.getElementById('app-css');
-  var main = document.getElementById('main-script');
-  if (css) css.addEventListener('load', function(){ target = Math.max(target, 32); });
-  if (main) main.addEventListener('load', function(){ target = Math.max(target, 66); });
-  if (window.PerformanceObserver) {
-    try {
-      new PerformanceObserver(function(list){
-        list.getEntries().forEach(function(e){
-          if (e.initiatorType === 'script' || e.initiatorType === 'link' || e.initiatorType === 'css') {
-            target = Math.min(88, target + 3);
-          }
-        });
-      }).observe({ entryTypes: ['resource'] });
-    } catch (e) {}
-  }
-  function finish() {
-    if (hidden) return;
-    hidden = true;
-    var wait = Math.max(0, 650 - (Date.now() - start));
-    setTimeout(function(){
-      boot.classList.add('done');
-      boot.setAttribute('aria-busy', 'false');
-      document.body.classList.remove('kt-booting');
-      setTimeout(function(){ if (boot.parentNode) boot.parentNode.removeChild(boot); }, 480);
-    }, wait);
-  }
-  function loop() {
-    if (hidden) return;
-    current += (target - current) * 0.1;
-    if (target - current < 0.4) current = target;
-    if (ready && current > 99.4) current = 100;
-    var p = Math.round(current);
-    fill.style.width = p + '%';
-    pct.textContent = p + '%';
-    bar.setAttribute('aria-valuenow', p);
-    status.textContent = p < 28 ? '正在加载界面样式…' : p < 60 ? '正在加载工具索引…' : p < 96 ? '正在准备首页…' : '准备完成';
-    if (ready && p >= 100) { finish(); return; }
-  }
-  window.addEventListener('kt:ready', function(){
-    ready = true;
-    target = 100;
-    hint.textContent = '加载完成，正在进入…';
-  });
-  window.addEventListener('load', function(){
-    if (!ready) target = Math.max(target, 70);
-  });
-  setInterval(function(){
-    if (hidden || ready) return;
-    target = Math.min(92, target + 0.8);
-    if (!slow && Date.now() - start > 15000) {
-      slow = true;
-      hint.textContent = '网络似乎有点慢，正在继续加载，请再稍候一会儿…';
-    }
-    if (Date.now() - start > 30000) {
-      retry.hidden = false;
-      hint.textContent = '加载时间较长，可以检查网络，或点击下方按钮重新加载。';
-    }
-  }, 900);
-  window.addEventListener('error', function(e){
-    if (ready || hidden) return;
-    if (e.target && (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT')) {
-      status.textContent = '资源加载失败';
-      hint.textContent = '请检查网络连接后点击重新加载。';
-      retry.hidden = false;
-    }
-  }, true);
-  retry.addEventListener('click', function(){ location.reload(); });
-  (function tick(){ loop(); if (!hidden) requestAnimationFrame(tick); })();
-})();
-</script>
-<script type="module" id="main-script" src="./assets/js/main.js?v=9"></script>
+<script type="module" id="main-script" src="./assets/js/main.js?v=10"></script>
 </body>
 </html>
