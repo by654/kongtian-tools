@@ -1,6 +1,6 @@
 ﻿/* 空天工具合集 · Service Worker
    只缓存同源静态资源；第三方 CDN 依赖仍走网络（浏览器 HTTP 缓存）。 */
-const CACHE = 'kongtian-tools-v8';
+const CACHE = 'kongtian-tools-v9';
 const SHELL = [
   './',
   './index.html',
