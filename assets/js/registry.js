@@ -39,7 +39,8 @@ export const CATEGORIES = [
   { id: 'lifepro', name: '出行与法律', icon: 'compass', desc: '旅行、汽车、合同、职业' },
   { id: 'funpro', name: '游戏与生成', icon: 'fun', desc: '数值、精灵图、谜题、生成艺术' },
   { id: 'geoext', name: '地图与天文', icon: 'globe', desc: '坐标、瓦片、轨迹、气象' },
-  { id: 'infra', name: '设备与协议', icon: 'chip', desc: '硬件、WebRTC、IoT、3D' }
+  { id: 'infra', name: '设备与协议', icon: 'chip', desc: '硬件、WebRTC、IoT、3D' },
+  { id: 'convert', name: '文件转换', icon: 'media', desc: '音视频、图片、文档、字幕、PDF、表格、压缩包' }
 ];
 
 export const TOOLS = [
@@ -379,7 +380,18 @@ export const TOOLS = [
   t('hardware-test', '硬件测试', 'infra', '电池、媒体设备、手柄、传感器、全屏、震动', ['硬件', '电池', '手柄', '传感器']),
   t('webrtc-tools', 'WebRTC 工具', 'infra', '本地回环、SDP 格式化、设备枚举、统计', ['WebRTC', 'SDP', '回环', '设备']),
   t('iot-tools', 'IoT 工具', 'infra', 'MQTT 主题/消息、传感器模拟、设备注册、二维码', ['IoT', 'MQTT', '传感器', '设备'], { deps: ['qrcode'] }),
-  t('xr3d-tools', '3D / XR 工具', 'infra', 'WebXR 检测、STL 体积面积、GLTF 结构统计', ['3D', 'WebXR', 'STL', 'GLTF'])
+  t('xr3d-tools', '3D / XR 工具', 'infra', 'WebXR 检测、STL 体积面积、GLTF 结构统计', ['3D', 'WebXR', 'STL', 'GLTF']),
+
+  /* ---------------- 文件转换 ---------------- */
+  t('convert-all', '转换工作台', 'convert', '音视频/图片/文档/字幕/PDF/表格/压缩包一站式批量转换', ['格式转换', '批量', '转换台', '本地处理'], { hot: true }),
+  t('convert-video', '视频转换', 'convert', '16 种输出：MP4/WEBM/MKV/MOV/AVI/TS/FLV/WMV/GIF，可只提取音轨', ['视频转换', 'mp4', 'webm', 'gif', '压缩']),
+  t('convert-audio', '音频转换', 'convert', '10 种输出与码率/采样率/声道/位深参数，覆盖 MP3/FLAC/OGG/M4A', ['音频转换', 'mp3', 'flac', 'm4a']),
+  t('convert-image', '图片格式转换', 'convert', 'JPG/PNG/WEBP/AVIF/BMP/TIFF/ICO/SVG/PDF 九类输出', ['图片转换', 'avif', 'webp', 'ico', 'tiff']),
+  t('convert-doc', '文档转换', 'convert', 'DOCX/ODT/RTF/EPUB/HTML/MD/TXT/PDF 互转', ['文档转换', 'docx', 'epub', 'md', 'pdf']),
+  t('convert-sheet', '表格转换', 'convert', 'XLSX/CSV/TSV/JSON/HTML 互转，保留工作表结构', ['表格转换', 'xlsx', 'csv', 'json']),
+  t('convert-subtitle', '字幕转换', 'convert', 'SRT/VTT/ASS 互转，支持时间轴整体偏移与纯文本导出', ['字幕', 'srt', 'vtt', 'ass']),
+  t('convert-pdf', 'PDF 工具箱', 'convert', '26 项操作：转图/转文本/转 HTML/CBZ、拆分拼版、小册子、水印、Bates、压缩', ['PDF', '合并', '拆分', '压缩', '转图'], { hot: true }),
+  t('convert-archive', '压缩包处理', 'convert', '解压与重新打包 ZIP，可筛选条目后重新生成', ['zip', '解压', '压缩包'])
 ];
 
 export const TOOL_MAP = Object.fromEntries(TOOLS.map((x) => [x.id, x]));
