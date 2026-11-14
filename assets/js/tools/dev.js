@@ -759,7 +759,7 @@ console.log(tools);
         .md-body h1{font-size:1.6em;border-bottom:1px solid var(--line);padding-bottom:.3em}
         .md-body h2{font-size:1.3em}
         .md-body p{margin:.6em 0}
-        .md-body code{background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:.9em}
+        .md-body code{background:var(--w-08);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:.9em}
         .md-body pre{background:rgba(0,0,0,.3);padding:12px;border-radius:8px;overflow:auto}
         .md-body pre code{background:none;padding:0}
         .md-body blockquote{border-left:3px solid var(--acc);margin:.8em 0;padding:.2em 12px;color:var(--muted)}

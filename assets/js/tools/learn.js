@@ -308,7 +308,7 @@ export default {
         const r = Math.floor(i / 9), c = i % 9;
         const thickR = c === 2 || c === 5 ? 'border-right:2px solid var(--line-strong);' : 'border-right:1px solid var(--line);';
         const thickB = r === 2 || r === 5 ? 'border-bottom:2px solid var(--line-strong);' : 'border-bottom:1px solid var(--line);';
-        return `<input id="sd-${i}" value="${v || ''}" ${v ? 'readonly' : ''} maxlength="1" inputmode="numeric" style="width:42px;height:42px;text-align:center;border:0;${thickR}${thickB}background:${v ? 'rgba(255,255,255,.04)' : 'var(--panel)'};color:${v ? 'var(--text)' : 'var(--acc)'};font-size:18px;outline:none">`;
+        return `<input id="sd-${i}" value="${v || ''}" ${v ? 'readonly' : ''} maxlength="1" inputmode="numeric" style="width:42px;height:42px;text-align:center;border:0;${thickR}${thickB}background:${v ? 'var(--w-04)' : 'var(--panel)'};color:${v ? 'var(--text)' : 'var(--acc)'};font-size:18px;outline:none">`;
       }).join('');
       root.querySelectorAll('#sd-board input').forEach((inp) => inp.addEventListener('input', () => {
         inp.value = inp.value.replace(/[^1-9]/g, '').slice(0, 1);
@@ -340,7 +340,7 @@ export default {
       <div class="tool-ui">
         <div class="panel">
           <div class="row between"><div><b style="font-size:22px;color:var(--acc)" id="g2-score">0</b><span class="hint"> 分</span></div><div class="row"><button class="btn primary" id="g2-new">新游戏</button><span class="hint" id="g2-status">方向键 / 滑动操作</span></div></div>
-          <div id="g2-board" style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:rgba(255,255,255,.04);padding:8px;border-radius:12px;touch-action:none"></div>
+          <div id="g2-board" style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--w-04);padding:8px;border-radius:12px;touch-action:none"></div>
         </div>
       </div>`;
     const $ = (s) => root.querySelector(s);
@@ -353,7 +353,7 @@ export default {
     };
     const add = () => { const e = emptyCell(); if (e.length) grid[e[Math.floor(Math.random() * e.length)]] = Math.random() < 0.9 ? 2 : 4; };
     const paint = () => {
-      $('#g2-board').innerHTML = grid.map((v) => `<div style="aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${v > 999 ? 18 : 24}px;background:${v ? colors[v] || '#e9eefc' : 'rgba(255,255,255,.03)'};color:${v > 128 ? '#0e1a2f' : v ? '#e9eefc' : 'transparent'}">${v || ''}</div>`).join('');
+      $('#g2-board').innerHTML = grid.map((v) => `<div style="aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${v > 999 ? 18 : 24}px;background:${v ? colors[v] || '#e9eefc' : 'var(--w-03)'};color:${v > 128 ? '#0e1a2f' : v ? '#e9eefc' : 'transparent'}">${v || ''}</div>`).join('');
       $('#g2-score').textContent = score;
       $('#g2-status').textContent = over ? '游戏结束，点击新游戏' : '方向键 / 滑动操作';
     };
@@ -527,9 +527,9 @@ export default {
         if (c.open) {
           if (c.mine) return `<div style="${base}background:rgba(251,113,133,.25);color:var(--err)">*</div>`;
           const colors = ['', '#38cdf0', '#34d399', '#fbbf24', '#fb923c', '#f472b6', '#c084fc', '#e879f9', '#fb7185'];
-          return `<div style="${base}background:rgba(255,255,255,.06);color:${colors[c.n] || 'var(--text)'}">${c.n || ''}</div>`;
+          return `<div style="${base}background:var(--w-06);color:${colors[c.n] || 'var(--text)'}">${c.n || ''}</div>`;
         }
-        return `<div style="${base}background:rgba(255,255,255,.12);color:${c.flag ? 'var(--warn)' : 'transparent'}" data-cell="${i}">${c.flag ? 'F' : '·'}</div>`;
+        return `<div style="${base}background:var(--w-12);color:${c.flag ? 'var(--warn)' : 'transparent'}" data-cell="${i}">${c.flag ? 'F' : '·'}</div>`;
       }).join('');
       board.querySelectorAll('[data-cell]').forEach((el) => {
         const i = Number(el.dataset.cell);

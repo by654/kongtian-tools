@@ -22,7 +22,7 @@ export default {
           <div class="row"><select class="sel" id="ca-type" style="max-width:190px"><option value="shape">CSS 形状</option><option value="clip">clip-path</option><option value="mask">遮罩</option><option value="blend">混合模式</option><option value="filter">滤镜链</option><option value="3d">3D 变换</option><option value="scroll">滚动动画</option></select><button class="btn primary" id="ca-run">生成</button><button class="btn" id="ca-copy">复制</button></div>
           <div class="grid3" id="ca-controls" style="margin-top:10px"></div>
         </div>
-        <div class="panel"><div class="panel-head"><b>预览</b></div><div style="height:220px;display:flex;align-items:center;justify-content:center;background:repeating-conic-gradient(rgba(255,255,255,.04) 0 25%,transparent 0 50%) 0 0/20px 20px;border-radius:10px;overflow:hidden"><div id="ca-preview" style="width:140px;height:140px;background:linear-gradient(135deg,#22d3ee,#818cf8)"></div></div></div>
+        <div class="panel"><div class="panel-head"><b>预览</b></div><div style="height:220px;display:flex;align-items:center;justify-content:center;background:repeating-conic-gradient(var(--w-04) 0 25%,transparent 0 50%) 0 0/20px 20px;border-radius:10px;overflow:hidden"><div id="ca-preview" style="width:140px;height:140px;background:linear-gradient(135deg,#22d3ee,#818cf8)"></div></div></div>
         <div class="panel"><div class="panel-head"><b>CSS</b></div><pre class="out" id="ca-out"></pre></div>
       </div>`;
     const $ = (s) => root.querySelector(s);

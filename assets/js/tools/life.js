@@ -140,7 +140,7 @@ export default {
         const d = new Date(); d.setDate(d.getDate() - (139 - i));
         const ds = d.toISOString().slice(0, 10);
         const n = list.filter((h) => h.days?.[ds]).length;
-        return `<div title="${ds} · ${n} 个习惯" style="width:14px;height:14px;border-radius:3px;background:${n ? `rgba(56,205,240,${0.25 + n * 0.2})` : 'rgba(255,255,255,.06)'}"></div>`;
+        return `<div title="${ds} · ${n} 个习惯" style="width:14px;height:14px;border-radius:3px;background:${n ? `rgba(56,205,240,${0.25 + n * 0.2})` : 'var(--w-06)'}"></div>`;
       }).join('')}</div>`;
       root.querySelectorAll('[data-tog]').forEach((b) => b.addEventListener('click', () => {
         const l = load(); const h = l.find((x) => x.id === Number(b.dataset.tog));
@@ -237,7 +237,7 @@ export default {
       const days = Array.from({ length: 14 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - (13 - i)); return d.toISOString().slice(0, 10); });
       $('#md-chart').innerHTML = days.map((d) => {
         const it = list.find((x) => x.date === d);
-        return `<div class="center" style="flex:1"><div style="height:${it ? it.score * 18 : 4}px;background:${it ? '#38cdf0' : 'rgba(255,255,255,.08)'};border-radius:4px 4px 0 0"></div><div class="hint" style="font-size:8px">${d.slice(5)}</div></div>`;
+        return `<div class="center" style="flex:1"><div style="height:${it ? it.score * 18 : 4}px;background:${it ? '#38cdf0' : 'var(--w-08)'};border-radius:4px 4px 0 0"></div><div class="hint" style="font-size:8px">${d.slice(5)}</div></div>`;
       }).join('');
       $('#md-list').innerHTML = list.slice(0, 20).map((x) => `<div class="panel tight"><div class="row between"><b>${x.date} · ${x.score}/5</b><button class="btn sm danger" data-del="${x.id}">删除</button></div><div class="hint" style="white-space:pre-wrap;margin-top:4px">${esc(x.note)}</div></div>`).join('') || '<div class="hint">还没有记录</div>';
       root.querySelectorAll('[data-del]').forEach((b) => b.addEventListener('click', () => { save(load().filter((x) => x.id !== Number(b.dataset.del))); paint(); }));

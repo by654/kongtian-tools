@@ -19,7 +19,7 @@ function injectCss() {
     '.mg-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px}',
     '.mg-note{font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}',
     '.mg-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}',
-    '.mg-tab{appearance:none;cursor:pointer;font:inherit;font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);transition:color .15s,border-color .15s,background .15s}',
+    '.mg-tab{appearance:none;cursor:pointer;font:inherit;font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--w-03);color:var(--muted);transition:color .15s,border-color .15s,background .15s}',
     '.mg-tab:hover{color:var(--text);border-color:var(--line-strong)}',
     '.mg-tab.on{color:var(--text);border-color:rgba(56,205,240,.45);background:linear-gradient(135deg,rgba(56,205,240,.16),rgba(129,140,248,.16))}',
     '.mg-body{min-height:120px}'
@@ -64,7 +64,7 @@ export function mountMerged(root, ctx, spec, ownFn, initialTab) {
     try {
       let fn = sec.render;
       if (!fn) {
-        const mod = await import(`../tools/${sec.cat}.js?v=11`);
+        const mod = await import(`../tools/${sec.cat}.js?v=13`);
         fn = mod.default?.[sec.id];
       }
       if (typeof fn !== 'function') throw new Error('未找到实现：' + sec.id);

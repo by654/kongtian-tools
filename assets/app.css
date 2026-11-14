@@ -23,12 +23,20 @@
   --sidebar:264px;
   --font:"Inter","PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:ui-monospace,"SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace;
+  --w-02:rgba(255,255,255,.02);
+  --w-03:rgba(255,255,255,.03);
+  --w-04:rgba(255,255,255,.04);
+  --w-06:rgba(255,255,255,.06);
+  --w-08:rgba(255,255,255,.08);
+  --w-12:rgba(255,255,255,.12);
+  --chart-grid:rgba(255,255,255,.06);
+  --chart-axis:#8b9bb8;
 }
 html[data-theme="light"]{
   --bg:#f3f6fc;
   --bg-soft:#eef3fb;
   --panel:#ffffff;
-  --panel-2:#f7f9fe;
+  --panel-2:#f4f8fd;
   --panel-3:#eef3fb;
   --text:#0e1a2f;
   --text-2:#2c3b55;
@@ -39,6 +47,14 @@ html[data-theme="light"]{
   --acc-2:#5b63d3;
   --acc-soft:rgba(14,159,196,.1);
   --shadow:0 16px 44px rgba(30,55,100,.12);
+  --w-02:rgba(16,32,58,.03);
+  --w-03:rgba(16,32,58,.05);
+  --w-04:rgba(16,32,58,.07);
+  --w-06:rgba(16,32,58,.09);
+  --w-08:rgba(16,32,58,.11);
+  --w-12:rgba(16,32,58,.16);
+  --chart-grid:rgba(16,32,58,.12);
+  --chart-axis:#5a6880;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -636,4 +652,156 @@ html[data-theme="light"] .hero::after{background:radial-gradient(circle,rgba(129
   .skeleton,.hero::after{animation:none!important}
 }
 
+/* =========================================================
+   亮色模式修正
+   背景：暗色主题里大量用 rgba(255,255,255,.0x) 表示"抬起/悬浮"，
+   在亮色主题下等价于"白底压白底"，于是出现按钮灰框变白、列表悬浮无反馈、
+   输入框看不清、选中态分不出等问题。下面按组件逐个换成语义正确的亮色值。
+   ========================================================= */
 
+/* ---------- 输入类：占位符、边框、悬浮 ---------- */
+html[data-theme="light"] ::placeholder{color:#8492a8;opacity:1}
+html[data-theme="light"] .inp,
+html[data-theme="light"] .ta,
+html[data-theme="light"] .sel{background:#fff;border-color:rgba(16,32,58,.16);color:var(--text)}
+html[data-theme="light"] .inp:hover,
+html[data-theme="light"] .ta:hover,
+html[data-theme="light"] .sel:hover{border-color:rgba(16,32,58,.28)}
+html[data-theme="light"] .hero-search input{
+  background:#fff;border-color:rgba(16,32,58,.16);
+  box-shadow:0 2px 10px rgba(30,55,100,.07);
+}
+html[data-theme="light"] .hero-search input:focus{border-color:rgba(14,159,196,.65);box-shadow:0 0 0 4px rgba(14,159,196,.14)}
+html[data-theme="light"] .search-trigger{background:#f2f6fd;border-color:rgba(16,32,58,.2);color:#4a5a74}
+html[data-theme="light"] .search-trigger:hover{background:#e0eafa;border-color:rgba(14,159,196,.55);color:var(--text)}
+html[data-theme="light"] kbd{background:#eef3fb;border-color:rgba(16,32,58,.16);color:#5a6880}
+html[data-theme="light"] .out{background:#f8fbff;border-color:rgba(16,32,58,.12)}
+html[data-theme="light"] .out:empty::before{color:#8492a8}
+
+/* ---------- 按钮：白底白框 -> 明确底色与边框 ---------- */
+html[data-theme="light"] .btn{
+  background:#f2f6fd;border-color:rgba(16,32,58,.24);color:var(--text);
+  box-shadow:0 1px 2px rgba(30,55,100,.09),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-theme="light"] .btn:hover{background:#e0eafa;border-color:rgba(16,32,58,.38);color:var(--text);box-shadow:0 2px 8px rgba(30,55,100,.13)}
+html[data-theme="light"] .btn:active{background:#d0ddf3;border-color:rgba(16,32,58,.46);box-shadow:inset 0 2px 4px rgba(30,55,100,.16)}
+html[data-theme="light"] .btn.ghost{background:transparent;border-color:rgba(16,32,58,.16);box-shadow:none}
+html[data-theme="light"] .btn.ghost:hover{background:#e0eafa;border-color:rgba(16,32,58,.34)}
+html[data-theme="light"] .btn.danger{background:#fff5f6;border-color:rgba(190,18,60,.3);color:#be123c;box-shadow:none}
+html[data-theme="light"] .btn.danger:hover{background:#ffe9ec;border-color:rgba(190,18,60,.45)}
+html[data-theme="light"] .btn.primary,
+html[data-theme="light"] .btn.primary:hover{
+  background:linear-gradient(135deg,#22b8e0,#5b63d3);border-color:transparent;color:#fff;
+  box-shadow:0 8px 20px rgba(34,150,200,.28);
+}
+html[data-theme="light"] .btn.primary:hover{filter:brightness(1.05)}
+html[data-theme="light"] .icon-btn{background:#f2f6fd;border-color:rgba(16,32,58,.22);color:#3d4c66}
+html[data-theme="light"] .icon-btn:hover{background:#e0eafa;border-color:rgba(16,32,58,.4);color:var(--text)}
+
+/* ---------- 胶囊 / 标签 / 计数 ---------- */
+html[data-theme="light"] .chip{background:#f2f6fd;border-color:rgba(16,32,58,.2);color:#3d4c66}
+html[data-theme="light"] .chip:hover{background:#e0eafa;border-color:rgba(16,32,58,.38);color:var(--text)}
+html[data-theme="light"] .chip.active{background:rgba(14,159,196,.14);border-color:rgba(14,159,196,.55);color:#0b7c99}
+html[data-theme="light"] .tag,
+html[data-theme="light"] .nav-item .cnt,
+html[data-theme="light"] .cat-card .cnt{background:rgba(16,32,58,.07);color:#5a6880}
+html[data-theme="light"] .pill{background:rgba(16,32,58,.03)}
+html[data-theme="light"] .pill.ok{background:rgba(4,120,87,.08);border-color:rgba(4,120,87,.3);color:#047857}
+html[data-theme="light"] .pill.acc{background:rgba(14,159,196,.1);border-color:rgba(14,159,196,.35);color:#0b7c99}
+html[data-theme="light"] .nav-item:hover{background:#e3ecfb;color:#0b1a30;box-shadow:inset 0 0 0 1px rgba(16,32,58,.1)}
+html[data-theme="light"] .nav-item.active{background:rgba(14,159,196,.13);border-color:rgba(14,159,196,.32)}
+html[data-theme="light"] .side-links a:hover{color:var(--text);background:#e3ecfb}
+
+/* ---------- 列表 / 卡片：悬浮反馈改为"加深底色" ---------- */
+html[data-theme="light"] .star-btn:hover{background:rgba(16,32,58,.09)}
+html[data-theme="light"] .cat-card{background:#fff}
+html[data-theme="light"] .cat-card:hover{background:#e6f0fe;border-color:rgba(14,159,196,.5);box-shadow:0 12px 26px rgba(30,55,100,.14)}
+html[data-theme="light"] .tool-card:hover{background:#e2edfd;border-color:rgba(14,159,196,.5)}
+html[data-theme="light"] .cat-card:hover,
+html[data-theme="light"] .tool-card:hover{box-shadow:0 12px 26px rgba(30,55,100,.12)}
+html[data-theme="light"] .p-item:hover,
+html[data-theme="light"] .p-item.sel{background:rgba(14,159,196,.12)}
+html[data-theme="light"] table.tbl th{background:#eef3fb}
+html[data-theme="light"] table.tbl tr:hover td{background:rgba(14,159,196,.08)}
+html[data-theme="light"] .table-scroll{border-color:rgba(16,32,58,.12)}
+html[data-theme="light"] .stat{background:#fff;border-color:rgba(16,32,58,.12)}
+html[data-theme="light"] .stat:hover{background:#e6f0fe;border-color:rgba(14,159,196,.42)}
+html[data-theme="light"] .drop{background:#f4f8fe;border-color:rgba(16,32,58,.26)}
+html[data-theme="light"] .drop:hover,
+html[data-theme="light"] .drop.over{background:rgba(14,159,196,.1);border-color:var(--acc);color:var(--text)}
+html[data-theme="light"] .thumb{background:#f5f8fd;border-color:rgba(16,32,58,.12)}
+html[data-theme="light"] .thumb .x{background:rgba(16,32,58,.62)}
+
+/* ---------- 分段控件 / 标签页：选中态必须一眼可辨 ---------- */
+html[data-theme="light"] .tabs{background:#e8eef9;border-color:rgba(16,32,58,.14)}
+html[data-theme="light"] .tab{color:#5a6880}
+html[data-theme="light"] .tab:hover{background:rgba(16,32,58,.1);color:var(--text)}
+html[data-theme="light"] .tab.active{background:#fff;color:#0b7c99;box-shadow:0 1px 3px rgba(30,55,100,.16)}
+html[data-theme="light"] .mg-tab{background:#f2f6fd;border-color:rgba(16,32,58,.22);color:#42506a}
+html[data-theme="light"] .mg-tab:hover{background:#e0eafa;color:var(--text);border-color:rgba(16,32,58,.4)}
+html[data-theme="light"] .mg-tab.on{
+  background:linear-gradient(135deg,rgba(14,159,196,.17),rgba(91,99,211,.15));
+  border-color:rgba(14,159,196,.55);color:#0b7c99;
+}
+
+/* ---------- 进度 / 开关 / 骨架 / 画布底纹 ---------- */
+html[data-theme="light"] .progress{background:rgba(16,32,58,.12)}
+html[data-theme="light"] .sw{background:rgba(16,32,58,.2)}
+html[data-theme="light"] .skeleton{
+  background:linear-gradient(90deg,rgba(16,32,58,.06) 25%,rgba(16,32,58,.13) 37%,rgba(16,32,58,.06) 63%);
+  background-size:420px 100%;
+}
+html[data-theme="light"] .canvas-wrap{
+  background:repeating-conic-gradient(rgba(16,32,58,.07) 0 25%,transparent 0 50%) 0 0/18px 18px;
+  border-color:rgba(16,32,58,.12);
+}
+
+/* ---------- 依赖面板 / 提示框 ---------- */
+html[data-theme="light"] .dep-card{
+  background:linear-gradient(135deg,rgba(14,159,196,.09),rgba(91,99,211,.07));
+  border-color:rgba(14,159,196,.3);
+}
+html[data-theme="light"] .dep-done{background:#f3fbf7;border-color:rgba(4,120,87,.2)}
+html[data-theme="light"] .warnbox{background:#fff8e8;border-color:rgba(146,97,10,.32);color:#8a5a05}
+html[data-theme="light"] .okbox{background:#f1fbf6;border-color:rgba(4,120,87,.26);color:#046c4e}
+html[data-theme="light"] .errbox{background:#fff5f6;border-color:rgba(190,18,60,.26);color:#b3173f}
+
+/* ---------- 命令面板 / 遮罩 ---------- */
+html[data-theme="light"] .palette{background:rgba(18,30,52,.34)}
+html[data-theme="light"] .palette-box{background:#fff;border-color:rgba(16,32,58,.16)}
+
+/* ---------- 首页视觉 ---------- */
+html[data-theme="light"] .hero h1 em{background:linear-gradient(100deg,#0e9fc4,#5b63d3 55%,#8b5cf6);-webkit-background-clip:text;background-clip:text}
+html[data-theme="light"] .hero-kicker{background:rgba(14,159,196,.1);border-color:rgba(14,159,196,.35)}
+html[data-theme="light"] .section-title .more:hover{color:#0b7c99}
+
+/* ---------- 转换面板（conv/panel.js 内联样式） ---------- */
+html[data-theme="light"] .cvp-item{background:#f5f8fd;border-color:rgba(16,32,58,.14)}
+html[data-theme="light"] .cvp-item.ok{border-color:rgba(4,120,87,.4)}
+html[data-theme="light"] .cvp-item.err{border-color:rgba(190,18,60,.45)}
+html[data-theme="light"] .cvp-item.err .st{color:#be123c}
+html[data-theme="light"] .cvp-tip,
+html[data-theme="light"] .cvp-params .hint{color:#5a6880;opacity:1}
+
+html[data-theme="light"] .btn:focus,
+html[data-theme="light"] .icon-btn:focus,
+html[data-theme="light"] .chip:focus,
+html[data-theme="light"] .mg-tab:focus{
+  background:#e0eafa;border-color:rgba(16,32,58,.4);color:var(--text);
+}
+html[data-theme="light"] .btn.primary:focus{background:linear-gradient(135deg,#22b8e0,#5b63d3);color:#fff;border-color:transparent}
+
+/* ---------- 焦点环：亮色下白环会消失 ---------- */
+html[data-theme="light"] :focus-visible{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--acc)}
+
+/* ---------- 主题切换过渡包含更多白底组件 ---------- */
+html.theme-switching .btn,
+html.theme-switching .icon-btn,
+html.theme-switching .chip,
+html.theme-switching .tabs,
+html.theme-switching .drop,
+html.theme-switching .out,
+html.theme-switching .inp,
+html.theme-switching .search-trigger{
+  transition:background-color .32s ease,color .32s ease,border-color .32s ease;
+}

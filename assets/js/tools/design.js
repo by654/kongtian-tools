@@ -272,7 +272,7 @@ export default {
           <div class="grid4" id="cg-controls" style="margin-top:11px"></div>
           <button class="btn primary" id="cg-run" style="margin-top:10px">生成 CSS</button>
         </div>
-        <div class="panel"><div class="panel-head"><b>预览</b></div><div style="padding:28px;display:flex;justify-content:center;background:rgba(255,255,255,.02);border-radius:10px"><div id="cg-preview" style="width:200px;height:120px;background:#38cdf0;border-radius:12px"></div></div></div>
+        <div class="panel"><div class="panel-head"><b>预览</b></div><div style="padding:28px;display:flex;justify-content:center;background:var(--w-02);border-radius:10px"><div id="cg-preview" style="width:200px;height:120px;background:#38cdf0;border-radius:12px"></div></div></div>
         <div class="panel"><div class="panel-head"><b>CSS</b><button class="btn sm" id="cg-copy">复制</button></div><pre class="out" id="cg-out"></pre></div>
       </div>`;
     const $ = (s) => root.querySelector(s);

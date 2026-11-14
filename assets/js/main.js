@@ -1,7 +1,8 @@
-﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=11';
-import { MERGED, ALIAS, mountMerged } from './core/merge.js?v=11';
+import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=13';
+import { MERGED, ALIAS, mountMerged } from './core/merge.js?v=13';
 import { icon, esc, copy, toast } from './core/ui.js';
 import { loadDeps, isLoaded, DEPS } from './core/deps.js';
+import { watchActionButtons } from './core/polish.js?v=13';
 
 const view = document.getElementById('view');
 const sideNav = document.getElementById('side-nav');
@@ -428,12 +429,14 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=11`);
+    const mod = await import(`./tools/${tool.cat}.js?v=13`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);
     root.innerHTML = '';
     root.classList.add('tool-body');
+    const stopPolish = watchActionButtons(root);
+    if (stopPolish) cleanupFns.push(stopPolish);
     const ctx = {
       tool,
       root,

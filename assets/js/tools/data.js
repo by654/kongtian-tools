@@ -1,6 +1,15 @@
 /* 数据、表格与可视化 */
 import { esc, copy, toast, download, fmtBytes, readAs } from '../core/ui.js';
 import { bindFileZone, fileZone, loadImage } from '../core/kit.js';
+const ktLight = () => document.documentElement.dataset.theme === 'light';
+const ktVar = (name, fb) => { try { const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim(); return v || fb; } catch (e) { return fb; } };
+const chartGrid = () => ktVar('--chart-grid', ktLight() ? 'rgba(16,32,58,.12)' : 'rgba(255,255,255,.06)');
+const chartAxis = () => ktVar('--chart-axis', ktLight() ? '#5a6880' : '#8b9bb8');
+const chartText = () => (ktLight() ? '#0e1a2f' : '#e9eefc');
+const chartLine = () => (ktLight() ? 'rgba(16,32,58,.16)' : 'rgba(255,255,255,.1)');
+const chartBar = () => (ktLight() ? 'rgba(14,159,196,.5)' : 'rgba(56,205,240,.55)');
+const chartBarEdge = () => (ktLight() ? '#0e9fc4' : '#38cdf0');
+const chartLabel = () => (ktLight() ? '#3a4a63' : '#c3cfe6');
 
 function splitCSV(text, delimiter = ',') {
   const rows = []; let row = [], cell = '', q = false;
@@ -405,8 +414,8 @@ export default {
       if (window.Chart) {
         chart = new window.Chart($('#dp-chart'), {
           type: 'bar',
-          data: { labels: out.map((x) => x[0]), datasets: [{ label: agg, data: out.map((x) => x[1]), backgroundColor: 'rgba(56,205,240,.55)', borderColor: '#38cdf0', borderWidth: 1, borderRadius: 5 }] },
-          options: { responsive: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#8b9bb8' }, grid: { color: 'rgba(255,255,255,.06)' } }, y: { ticks: { color: '#8b9bb8' }, grid: { color: 'rgba(255,255,255,.06)' } } } }
+          data: { labels: out.map((x) => x[0]), datasets: [{ label: agg, data: out.map((x) => x[1]), backgroundColor: chartBar(), borderColor: chartBarEdge(), borderWidth: 1, borderRadius: 5 }] },
+          options: { responsive: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: chartAxis() }, grid: { color: chartGrid() } }, y: { ticks: { color: chartAxis() }, grid: { color: chartGrid() } } } }
         });
       }
     };
@@ -467,14 +476,14 @@ export default {
             datasets: [{
               label: $('#cm-title').value, data: values,
               backgroundColor: isPie ? labels.map((_, i) => colors[i % colors.length] + 'cc') : colors[0] + '55',
-              borderColor: isPie ? '#0b1220' : colors[0], borderWidth: isPie ? 2 : 2,
+              borderColor: isPie ? (ktLight() ? '#ffffff' : '#0b1220') : colors[0], borderWidth: isPie ? 2 : 2,
               fill: type === 'line', tension: 0.35, pointBackgroundColor: colors[0], pointRadius: 3
             }]
           },
           options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: isPie, labels: { color: '#8b9bb8' } }, title: { display: !!$('#cm-title').value, text: $('#cm-title').value, color: '#e9eefc' } },
-            scales: isPie ? {} : { x: { ticks: { color: '#8b9bb8' }, grid: { color: 'rgba(255,255,255,.06)' } }, y: { ticks: { color: '#8b9bb8' }, grid: { color: 'rgba(255,255,255,.06)' } } }
+            plugins: { legend: { display: isPie, labels: { color: chartAxis() } }, title: { display: !!$('#cm-title').value, text: $('#cm-title').value, color: chartText() } },
+            scales: isPie ? {} : { x: { ticks: { color: chartAxis() }, grid: { color: chartGrid() } }, y: { ticks: { color: chartAxis() }, grid: { color: chartGrid() } } }
           }
         });
         $('#cm-meta').textContent = `${rows.length} 个数据点`;
@@ -791,10 +800,10 @@ PDF,3
         const day = new Date(start); day.setDate(start.getDate() + w * 7 + d);
         const key = day.toISOString().slice(0, 10);
         const n = counts.get(key) || 0;
-        g.fillStyle = n ? `rgba(56,205,240,${0.2 + 0.8 * (n / max)})` : 'rgba(255,255,255,.06)';
+        g.fillStyle = n ? `rgba(56,205,240,${0.2 + 0.8 * (n / max)})` : chartGrid();
         g.fillRect(left + w * (cell + gap), top + d * (cell + gap), cell, cell);
       }
-      g.fillStyle = '#8b9bb8'; g.font = '10px sans-serif'; g.textAlign = 'left';
+      g.fillStyle = chartAxis(); g.font = '10px sans-serif'; g.textAlign = 'left';
       g.fillText('过去 26 周', left, 14);
       $('#vz-heat').title = `${counts.size} 天有记录`;
     };
@@ -813,10 +822,10 @@ PDF,3
         const w = Math.max(4, (e - s) / span * (cv.width - 150));
         g.fillStyle = colors[i % colors.length] + 'aa';
         g.fillRect(x, 26 + i * rowH, w, rowH - 8);
-        g.fillStyle = '#c3cfe6'; g.font = '11px sans-serif'; g.textAlign = 'right';
+        g.fillStyle = chartLabel(); g.font = '11px sans-serif'; g.textAlign = 'right';
         g.fillText(t[0].slice(0, 10), 112, 26 + i * rowH + (rowH - 8) / 2 + 4);
       });
-      g.strokeStyle = 'rgba(255,255,255,.1)'; g.beginPath(); g.moveTo(120, 18); g.lineTo(120, 26 + tasks.length * rowH); g.stroke();
+      g.strokeStyle = chartLine(); g.beginPath(); g.moveTo(120, 18); g.lineTo(120, 26 + tasks.length * rowH); g.stroke();
     };
     $('#vz-tl-run').onclick = () => {
       const items = $('#vz-events').value.split(/\r?\n/).map((l) => l.split(/[,，]/)).filter((x) => x[0]);
