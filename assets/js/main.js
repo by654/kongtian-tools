@@ -1,4 +1,4 @@
-﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=7';
+﻿import { CATEGORIES, TOOLS, TOOL_MAP, CAT_MAP, countByCat } from './registry.js?v=8';
 import { icon, esc, copy, toast } from './core/ui.js';
 import { loadDeps, isLoaded, DEPS } from './core/deps.js';
 
@@ -420,7 +420,7 @@ async function renderTool(id) {
   const depArea = document.getElementById('dep-area');
   const token = ++navToken;
   try {
-    const mod = await import(`./tools/${tool.cat}.js?v=7`);
+    const mod = await import(`./tools/${tool.cat}.js?v=8`);
     if (token !== navToken) return;
     const fn = mod.default?.[id];
     if (typeof fn !== 'function') throw new Error('该工具的实现尚未加载：' + id);
@@ -448,15 +448,6 @@ async function renderTool(id) {
 /* ---------------- 主渲染 ---------------- */
 function render() {
   runCleanup();
-  view.classList.remove('page-in');
-  void view.offsetWidth;
-  view.classList.add('page-in');
-  const bar = document.getElementById('route-progress');
-  if (bar) {
-    bar.classList.remove('run');
-    void bar.offsetWidth;
-    bar.classList.add('run');
-  }
   const { parts, query } = parseRoute();
   const name = routeName();
   if (name === 'home') renderHome();
@@ -562,13 +553,8 @@ document.addEventListener('keydown', (e) => {
 
 /* ---------------- 启动 ---------------- */
 window.addEventListener('hashchange', () => {
-  const go = () => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    render();
-  };
-  if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.startViewTransition(go);
-  } else go();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  render();
 });
 render();
 
